@@ -15,6 +15,7 @@
   nix.settings = {
     substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
     experimental-features = [ "nix-command flakes" ];
+    use-xdg-base-directories = true;
     nix-path = config.nix.nixPath;
   };
   networking = {
