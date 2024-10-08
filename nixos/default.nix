@@ -109,6 +109,8 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.vss = {
     isNormalUser = true;
+    shell = pkgs.zsh;
+    ignoreShellProgramCheck = true;
     extraGroups = [ "wheel" "networkmanager" "input" "video" "audio"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       kitty
@@ -130,6 +132,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
+    pathsToLink = [ "/share/zsh" ];
     sessionVariables = rec {
       XDG_CACHE_HOME  = "$HOME/.cache";
       XDG_CONFIG_HOME = "$HOME/.config";
@@ -140,8 +143,10 @@
         "${XDG_BIN_HOME}"
       ];
     };
+    shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
       home-manager
+      lxappearance
       wget
       vim
       git
