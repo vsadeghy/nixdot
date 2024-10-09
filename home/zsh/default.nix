@@ -41,6 +41,7 @@
         path = "$XDG_STATE_HOME/history";
         size = 5000;
         save = 5000;
+        extended = false;
         expireDuplicatesFirst = true;
         append = true;
         share = true;
