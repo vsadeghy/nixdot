@@ -24,9 +24,9 @@ in {
     config = {
       modifier = mod;
       workspaceAutoBackAndForth = true;
-      window.border = 1;
+      window.border = -1;
       floating = {
-        border = 2;
+        border = -1;
         criteria = [
           { class = "Pavucontrol"; }
           { class = "Variety"; }
@@ -35,6 +35,7 @@ in {
         ];
       };
       startup = [
+        { command = "xrandr --output HDMI-1 --auto --left-of --DP-1"; }
         { command = "xss-lock --transfer-sleep-lock -- i3lock-color --nofork"; }
         # { command = "nitrogen --restore"; }
         # { command = "clipit"; }
@@ -43,13 +44,13 @@ in {
       ];
       modes = {
         ${mode_system} = {
-          l         = ''exec --no-startup-id i3lock             , mode "default"'';
-          s         = ''exec --no-startup-id systemctl suspend  , mode "default"'';
-          u         = ''exec --no-startup-id i3exit switch_user , mode "default"'';
-          e         = ''exec --no-startup-id i3-msg exit        , mode "default"'';
-          h         = ''exec --no-startup-id systemctl hibernate, mode "default"'';
-          r         = ''exec --no-startup-id systemctl reboot   , mode "default"'';
-          "Shift+s" = ''exec --no-startup-id systemctl poweroff , mode "default"'';
+          l         = "exec --no-startup-id i3lock             , mode default";
+          s         = "exec --no-startup-id systemctl suspend  , mode default";
+          u         = "exec --no-startup-id i3exit switch_user , mode default";
+          e         = "exec --no-startup-id i3-msg exit        , mode default";
+          h         = "exec --no-startup-id systemctl hibernate, mode default";
+          r         = "exec --no-startup-id systemctl reboot   , mode default";
+          "Shift+s" = "exec --no-startup-id systemctl poweroff , mode default";
 
           Return = "mode default";
           Escape = "mode default";
@@ -64,10 +65,10 @@ in {
           Escape = "mode default";
         };        
         ${mode_gaps} = {
-          o      = "mode ''${mode_gaps_outer}''";
-          i      = "mode ''${mode_gaps_inner}''";
-          Return = "mode ''default''";
-          Escape = "mode ''default''";
+          o      = ''mode "${mode_gaps_outer}"'';
+          i      = ''mode "${mode_gaps_inner}"'';
+          Return = "mode default";
+          Escape = "mode default";
         };
         ${mode_gaps_inner} = {
           plus    = "gaps inner current plus 5";
@@ -78,8 +79,8 @@ in {
           "Shift+minus" = "gaps inner all minus 5";
           "Shift+0"     = "gaps inner all set 0";
         
-          Return = "mode ''default''";
-          Escape = "mode ''default''";
+          Return = "mode default";
+          Escape = "mode default";
         };
         "${mode_gaps_outer}" = {
           plus    = "gaps outer current plus 5";
@@ -90,8 +91,8 @@ in {
           "Shift+minus" = "gaps outer all minus 5";
           "Shift+0"     = "gaps outer all set 0";
         
-          Return = ''mode "default"'';
-          Escape = ''mode "default"'';
+          Return = "mode default";
+          Escape = "mode default";
         };
       };
       keycodebindings = {

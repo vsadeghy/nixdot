@@ -80,7 +80,7 @@
             primary = true;
             position = "1280x0";
             mode = "1920x1080";
-            rate = "144.00";
+            # rate = "144.00";
           };
         };
       };
