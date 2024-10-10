@@ -12,7 +12,7 @@
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "v4l2loopback" ];
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
     supportedFilesystems = [ "ntfs" ];
   };
   nix.settings = {
@@ -86,6 +86,7 @@
       };
     };
 
+    displayManager.defaultSession = "none+i3";
     xserver = {
       enable = true;
       windowManager = {
@@ -95,8 +96,10 @@
           extraPackages = with pkgs; [
             dmenu
             rofi
+            i3status
             i3status-rust
-            i3lock
+            i3lock-color
+            xss-lock
             i3blocks
           ];
         };

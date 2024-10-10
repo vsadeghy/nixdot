@@ -1,11 +1,14 @@
 { config, pkgs, inputs, ... }: {
   imports = [
+    inputs.nix-colors.homeManagerModules.default
     ./zsh
+    ./i3
   ];
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
   home = {
-  username = "vss";
-  homeDirectory = "/home/vss";
-  stateVersion = "24.05";
+    username = "vss";
+    homeDirectory = "/home/vss";
+    stateVersion = "24.05";
     packages = [
       # # Adds the 'hello' command to your environment. It prints a friendly
       # # "Hello, world!" when run.
