@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }: {
   imports = [
     inputs.nix-colors.homeManagerModules.default
-    ./zsh
+    ./terminal
     ./i3
   ];
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;

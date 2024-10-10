@@ -8,6 +8,12 @@
       syntaxHighlighting.enable = true;
       autocd = true;
       defaultKeymap = "viins";
+
+      shellAliases = {
+        l = "eza -lah";
+        l1 = "eza -1a";
+        "l." = "eza -d .*";
+      };
     
       envExtra = ''
         source $XDG_STATE_HOME/nix/profile/etc/profile.d/hm-session-vars.sh
@@ -74,6 +80,12 @@
     fzf = {
      enable = true;
      enableZshIntegration = true;
+    };
+    eza = {
+     enable = true;
+     enableZshIntegration = true;
+     icons = true;
+     git = true;
     };
   };
 }
