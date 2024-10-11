@@ -14,6 +14,7 @@
       disable_ligatures = false;
       enable_audio_bell = true;
       extraConfig = with config.colorScheme.palette; ''
+        # base16 colors
         background #${base00}
         foreground #${base05}
         selection_background #${base0D}

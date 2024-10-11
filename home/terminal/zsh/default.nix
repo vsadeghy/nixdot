@@ -21,6 +21,9 @@
         [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
       '';
       initExtraFirst = ''
+        clear
+        nitch
+
         # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
         # Initialization code that may require console input (password prompts, [y/n]
         # confirmations, etc.) must go above this block; everything else may go below.
@@ -38,10 +41,6 @@
         zstyle ':completion:*' menu no
         zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
         zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-
-
-        clear
-        nitch
       '';
     
       history = {
@@ -72,21 +71,6 @@
           file = "powerlevel10k.zsh-theme";
         }
       ];
-    };
-    zoxide = {
-     enable = true;
-     enableZshIntegration = true;
-     options = [ "--cmd cd" ];
-    };
-    fzf = {
-     enable = true;
-     enableZshIntegration = true;
-    };
-    eza = {
-     enable = true;
-     enableZshIntegration = true;
-     icons = true;
-     git = true;
     };
   };
 }

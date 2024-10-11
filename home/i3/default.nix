@@ -26,7 +26,7 @@ in {
       workspaceAutoBackAndForth = true;
       window.border = -1;
       floating = {
-        border = -1;
+        border = 0;
         criteria = [
           { class = "Pavucontrol"; }
           { class = "Variety"; }
