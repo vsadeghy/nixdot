@@ -8,10 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # zen-browser = {
-    #   url = "github:MarceColl/zen-browser-flake";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    zen-browser = {
+      url = "github:MarceColl/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:

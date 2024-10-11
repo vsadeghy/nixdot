@@ -1,6 +1,6 @@
 { pkgs, config, ...}: let
   mod = "Mod4";
-  browser = "brave";
+  browser = "zen";
   terminal = "kitty";
   ws1 = "1";
   ws2 = "2";

@@ -10,6 +10,7 @@
       defaultKeymap = "viins";
 
       shellAliases = {
+        v = "nvim";
         l = "eza -lah";
         l1 = "eza -1a";
         "l." = "eza -d .*";
