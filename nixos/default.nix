@@ -16,10 +16,18 @@
     supportedFilesystems = [ "ntfs" ];
   };
   nix.settings = {
-    substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+    substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" "https://cache.nixos.org" ];
     experimental-features = [ "nix-command flakes" ];
     use-xdg-base-directories = true;
     nix-path = config.nix.nixPath;
+  };
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      extraArgs = "--keep 10";
+    };
+    flake = "/home/vss/.nixdot";
   };
   networking = {
     # firewall.allowedTCPPorts = [ ... ];
@@ -156,6 +164,8 @@
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
       home-manager
+      nix-output-monitor
+      nvd
       lxappearance
       wget
       vim
