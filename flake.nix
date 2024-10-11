@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nix-colors.url = "github:misterio77/nix-colors";
+    stylix.url = "github:danth/stylix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +32,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./nixos
+        inputs.stylix.nixosModules.stylix
       ];
     };
 
