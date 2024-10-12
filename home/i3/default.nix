@@ -21,12 +21,19 @@ in {
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
+    extraConfig = ''
+      default_border pixel 1
+      default_floating_border normal
+      for_window [urgent=latest] focus
+    '';
     config = {
       modifier = mod;
       workspaceAutoBackAndForth = true;
-      window.border = -1;
+      gaps = {
+        inner = 14;
+        outer = -2;
+      };
       floating = {
-        border = 0;
         criteria = [
           { class = "Pavucontrol"; }
           { class = "Variety"; }
