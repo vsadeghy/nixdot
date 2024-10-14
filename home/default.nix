@@ -54,7 +54,7 @@
     #  /etc/profiles/per-user/vss/etc/profile.d/hm-session-vars.sh
     #
     sessionVariables = {
-      EDITOR = "vim";
+      EDITOR = "nvim";
     };
   };
 

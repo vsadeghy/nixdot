@@ -8,13 +8,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:MarceColl/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nixvim, ... }:
   let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
@@ -40,6 +44,7 @@
       extraSpecialArgs = { inherit inputs; };
       modules = [
         ./home
+        nixvim.homeManagerModules.nixvim
       ];
     };
   };

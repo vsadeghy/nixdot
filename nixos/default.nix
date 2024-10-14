@@ -16,7 +16,7 @@
     supportedFilesystems = [ "ntfs" ];
   };
   nix.settings = {
-    substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" "https://cache.nixos.org" ];
+    substituters = lib.mkForce [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" "https://cache.nixos.org" ];
     experimental-features = [ "nix-command flakes" ];
     use-xdg-base-directories = true;
     nix-path = config.nix.nixPath;

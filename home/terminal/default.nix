@@ -1,6 +1,7 @@
 { pkgs, ...} : {
   imports = [
     ./zsh
+    ./nixvim
     ./kitty.nix
   ];
   home.packages = with pkgs; [ nitch neofetch ];
