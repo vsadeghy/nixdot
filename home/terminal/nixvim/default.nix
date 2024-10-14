@@ -1,6 +1,7 @@
 { inputs, ... }: {
   imports = [
     ./options.nix
+    ./keymaps.nix
   ];
   home.shellAliases.v = "nvim";
   programs.nixvim = {
@@ -14,6 +15,7 @@
         };
       };
     };
+    plugins.which-key.enable = true;
     vimAlias = true;
     luaLoader.enable = true;
   };
