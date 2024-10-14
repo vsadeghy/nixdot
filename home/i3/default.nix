@@ -1,4 +1,4 @@
-{ pkgs, config, ...}: let
+{ pkgs, config, lib, ...}: let
   mod = "Mod4";
   browser = "zen";
   terminal = "kitty";
@@ -225,13 +225,11 @@ in {
       #   }
       # ];
 
-      bars = let
-      # bar = { tray }: {
-      bar = {
+      bars = # lib.forEach ["DP-1" "primary"] (tray: {
+        [{
         command = "i3bar";
         statusCommand = "i3status-rs";
         # trayOutput = tray;
-        trayOutput = "DP-1";
         colors = with config.colorScheme.palette; {
           background = "#${base00}";
           separator  = "#${base01}";
@@ -262,11 +260,8 @@ in {
             text        = "#${base00}";
           };
         };
-      }; in [
-        bar
-        # bar { tray = "primary"; }
-        # bar { tray = "DP-1"; }
-      ];
+      }];
+      #);
       colors = with config.colorScheme.palette; {
         background    = "#${base07}";
         focused = {
