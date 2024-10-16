@@ -8,14 +8,6 @@
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
-    colorschemes = {
-      catppuccin = {
-        enable = true;
-        settings = {
-          flavour = "macchiato";
-        };
-      };
-    };
     # performance = {
     #   combinePlugins = {
     #     enable = true;
