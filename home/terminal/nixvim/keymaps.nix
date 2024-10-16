@@ -1,14 +1,7 @@
-{ config, lib, ... }: let
-  opts = { noremap = true; silent = true; };
-  mkMap = mode: lib.mapAttrsToList ( key: action: with builtins; {
-    inherit key mode;
-    action = elemAt action 0;
-    options = opts // elemAt (action++[{}]) 1;
-  });
-  nmap = mkMap "n";
-  imap = mkMap "i";
-  vmap = mkMap "v";
+{ config, options, lib, ... }: let
+  inherit (import ./maps.nix { inherit lib; }) nmap vmap imap;
 in {
+
   programs.nixvim = {
     globals = {
       mapleader = " ";
@@ -107,7 +100,7 @@ in {
         ];
 
         # Easy comment
-        "<C-/>" = [ "gcc" ];
+        # "<leader>/" = [ "gcc" ];
 
         # Use Menu key to cycle with the recent file
         "" = [":b#<cr>" ];
@@ -131,7 +124,7 @@ in {
         "J" = [ ":m '>+1<cr>gv=gv" ];
 
         # Easy comment
-        "<C-/>" = [ "gc" ];
+        # "<leader>/" = [ "gc" ];
       };
       insert = imap {
         # Easy escape
