@@ -42,7 +42,7 @@ in {
         ];
       };
       startup = [
-        { command = "xrandr --output HDMI-1 --auto --left-of --DP-1"; }
+        { command = "${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --primary --mode 1920x1080 --pos 1285x0 --rotate normal --output HDMI-1 --mode 1280x1024 --pos 0x0 --rotate normal"; }
         { command = "xss-lock --transfer-sleep-lock -- i3lock-color --nofork"; }
         # { command = "nitrogen --restore"; }
         # { command = "clipit"; }

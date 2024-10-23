@@ -38,7 +38,7 @@
       bell_border_color #${base03}
       tab_bar_style fade
       tab_fade 1
- 
+
       # normal
       color0  #${base03}
       color1  #${base08}
@@ -48,7 +48,7 @@
       color5  #${base0E}
       color6  #${base0C}
       color7  #${base06}
- 
+
       # bright
       color8  #${base04}
       color9  #${base08}
@@ -58,7 +58,7 @@
       color13 #${base0E}
       color14 #${base0C}
       color15 #${base07}
- 
+
       # extended base16 colors
       color16 #${base00}
       color17 #${base0F}

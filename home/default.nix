@@ -10,9 +10,11 @@
     username = "vss";
     homeDirectory = "/home/vss";
     stateVersion = "24.05";
-    packages = [
-      (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
-
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
+      unzip
+      unrar
+      obsidian
       # # You can also create simple shell scripts directly inside your
       # # configuration. For example, this adds a command 'my-hello' to your
       # # environment:
@@ -53,8 +55,19 @@
     #
     #  /etc/profiles/per-user/vss/etc/profile.d/hm-session-vars.sh
     #
-    sessionVariables = {
+    sessionVariables = rec {
+      XDG_CACHE_HOME  = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME   = "$HOME/.local/share";
+      XDG_STATE_HOME  = "$HOME/.local/state";
+      XDG_BIN_HOME    = "$HOME/.local/bin";
+
       EDITOR = "nvim";
+      VOLTA_HOME = "${XDG_CONFIG_HOME}/volta";
+      # PATH = [
+      #   "${VOLTA_HOME}"
+      #   "${XDG_BIN_HOME}"
+      # ];
     };
   };
 

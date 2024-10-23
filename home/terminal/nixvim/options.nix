@@ -1,4 +1,4 @@
-{
+{lib, ... }: {
   programs.nixvim = {
     opts = {
       number = true; # Set numbered lines (default: false)
@@ -49,13 +49,23 @@
       lazyredraw = true;
       hidden = true;
     };
-    globals = {
+
+    globals = let
+      d = [
+        "netrw" "netrwPlugin" "netrwSettings" "netrwFileHandlers"
+        "gzip" "zip" "zipPlugin" "tar" "tarPluin" "matchit"
+        "getscript" "getscriptPlugin" "vimball" "vimballPlugin"
+        "2html_plugin" "logipat" "rrhelper" "spellfile_plugin"
+      ];
+      disableBuiltins = builtins.listToAttrs (map (p: lib.attrsets.nameValuePair ("loaded_" + p) (1)) d);
+    in with lib.attrsets;{
       mapleader = " ";
       maplocalleader = " ";
       reSize = 5; # <C-w> resize amount,
       # did_load_filetypes = 1;
       shell = "/bin/zsh";
-    };
+    } //  disableBuiltins;
+
     clipboard = {
       register = "unnamedplus";
       providers.xsel.enable = true;

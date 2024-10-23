@@ -16,7 +16,7 @@ in {
         "<leader>x" = [ ":quit<cr>" { desc = "Quit File";} ];
 
         # save file without auto-formatting
-        "<leader>sn" = [ ":noautocmd w<cr>" ];
+        "<leader>S" = [ ":noautocmd w<cr>" ];
 
 
         # delete single character without copying into register
@@ -116,7 +116,7 @@ in {
         "<Tab>" = [ "<gv" ];
         "<S-Tab>" = [ ">gv" ];
 
-        "p" = [ ''"_dp'' ];
+        "p" = [ ''"_dP'' ];
         # Keep last yanked when pasting
 
         # Move selected line / block of text in visual mode

@@ -14,13 +14,17 @@
         l = "eza -lah";
         l1 = "eza -1a";
         "l." = "eza -d .*";
+        hb = "nh home switch";
+        hbb = "home-manager switch --flake ~/.nixdot";
+        sb = "sudo nh os switch";
+        sbb = "sudo nixos-rebuild switch --flake ~/.nixdot";
       };
-    
-      envExtra = ''
+
+      envExtra = /* bash */ ''
         source $XDG_STATE_HOME/nix/profile/etc/profile.d/hm-session-vars.sh
         [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
       '';
-      initExtraFirst = ''
+      initExtraFirst = /* bash */ ''
         clear
         nitch
 
@@ -31,7 +35,7 @@
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
       '';
-      initExtra = ''
+      initExtra = /* bash */ ''
         bindkey "^p" history-search-backward
         bindkey "^n" history-search-forward
         compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
