@@ -23,24 +23,7 @@ in{
       enable = true;
       nixGrammars = false;
       settings = {
-        ensure_installed = [
-          "javascript"
-          "typescript"
-          "jsdoc"
-          "json"
-          "json5"
-          "jsonc"
-          "html"
-          "css"
-          "tsx"
-          "nix"
-          "markdown"
-          "lua"
-          "bash"
-          "gitignore"
-          "python"
-          "rust"
-        ];
+        inherit ensure_installed;
         auto_install = false;
         highlight = {
           enable = true;
@@ -49,6 +32,6 @@ in{
         indent.enable = true;
       };
     };
-    lazy.plugins = with pkgs.vimPlugins; [nvim-treesitter hmts-nvim];
+    lazy.plugins = with pkgs.vimPlugins; [ nvim-treesitter hmts-nvim ];
   };
 }
