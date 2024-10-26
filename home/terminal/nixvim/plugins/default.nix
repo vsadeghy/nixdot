@@ -5,6 +5,7 @@
     ./base16.nix
     ./lsp.nix
     ./none-ls.nix
+    ./completions.nix
   ];
   programs.nixvim.plugins = {
     lazy = {
