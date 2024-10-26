@@ -4,6 +4,7 @@
     ./treesitter.nix
     ./base16.nix
     ./lsp.nix
+    ./none-ls.nix
   ];
   programs.nixvim.plugins = {
     lazy = {

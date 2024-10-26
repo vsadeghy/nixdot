@@ -11,6 +11,7 @@ in {
     keymaps = let
       normal = nmap {
         "<Space>" = [ "<Nop>" ];
+        "gx" = [ "<Nop>" ];
 
         "<leader>s" = [ ":write<cr>" { desc = "Save File";} ];
         "<leader>x" = [ ":quit<cr>" { desc = "Quit File";} ];
