@@ -5,7 +5,6 @@
   ...
 }: let
   lua = config.lib.nixvim.toLuaObject;
-  raw = config.lib.nixvim.mkRaw;
   inherit (import ../maps.nix {inherit lib;}) nmap;
   servers = {
     ts_ls = {};
@@ -36,7 +35,6 @@
     };
   };
   ensure_installed = ["stylua"] ++ lib.attrsets.mapAttrsToList (name: _: name) servers;
-  buffer = 69;
 in {
   home.packages = with pkgs; [typescript cargo];
   programs.nixvim = {

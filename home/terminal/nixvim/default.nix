@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{...}: {
   imports = [
     ./options.nix
     ./keymaps.nix

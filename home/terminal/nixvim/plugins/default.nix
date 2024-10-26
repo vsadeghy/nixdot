@@ -1,4 +1,4 @@
-{lib, pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./neotree.nix
     ./treesitter.nix
@@ -16,4 +16,3 @@
     };
   };
 }
-

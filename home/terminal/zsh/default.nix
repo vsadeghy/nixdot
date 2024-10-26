@@ -1,4 +1,4 @@
-{ pkgs, ...} : {
+{pkgs, ...}: {
   programs = {
     zsh = {
       enable = true;
@@ -20,33 +20,45 @@
         sbb = "sudo nixos-rebuild switch --flake ~/.nixdot";
       };
 
-      envExtra = /* bash */ ''
-        source $XDG_STATE_HOME/nix/profile/etc/profile.d/hm-session-vars.sh
-        [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
-      '';
-      initExtraFirst = /* bash */ ''
-        clear
-        nitch
+      envExtra =
+        /*
+        bash
+        */
+        ''
+          source $XDG_STATE_HOME/nix/profile/etc/profile.d/hm-session-vars.sh
+          [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
+        '';
+      initExtraFirst =
+        /*
+        bash
+        */
+        ''
+          clear
+          nitch
 
-        # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-        # Initialization code that may require console input (password prompts, [y/n]
-        # confirmations, etc.) must go above this block; everything else may go below.
-        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-        fi
-      '';
-      initExtra = /* bash */ ''
-        bindkey "^p" history-search-backward
-        bindkey "^n" history-search-forward
-        compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
-        zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}}'
-        zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
-        zstyle ':completion:*' menu no
-        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-        zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-      '';
-    
+          # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+          # Initialization code that may require console input (password prompts, [y/n]
+          # confirmations, etc.) must go above this block; everything else may go below.
+          if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+            source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+          fi
+        '';
+      initExtra =
+        /*
+        bash
+        */
+        ''
+          bindkey "^p" history-search-backward
+          bindkey "^n" history-search-forward
+          compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
+          zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+          zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}}'
+          zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
+          zstyle ':completion:*' menu no
+          zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+          zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+        '';
+
       history = {
         path = "$XDG_STATE_HOME/history";
         size = 5000;

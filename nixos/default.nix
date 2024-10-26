@@ -1,31 +1,33 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   mirrors = [
     "https://mirror.sjtu.edu.cn/nix-channels/store"
     "https://mirrors.ustc.edu.cn/nix-channels/store"
     "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
   ];
 in {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-    supportedFilesystems = [ "ntfs" ];
+    initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
+    supportedFilesystems = ["ntfs"];
   };
   nix.settings = {
     substituters = mirrors;
     trusted-substituters = mirrors;
-    experimental-features = [ "nix-command flakes" ];
+    experimental-features = ["nix-command flakes"];
     use-xdg-base-directories = true;
     nix-path = config.nix.nixPath;
   };
@@ -43,7 +45,7 @@ in {
     # Or disable the firewall altogether.
     # firewall.enable = false;
 
-  # Copy the NixOS configuration file and link it from the resulting system
+    # Copy the NixOS configuration file and link it from the resulting system
     hostName = "vix";
     wireless = {
       enable = true;
@@ -133,7 +135,7 @@ in {
     isNormalUser = true;
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
-    extraGroups = [ "wheel" "networkmanager" "input" "video" "audio"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "networkmanager" "input" "video" "audio"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       kitty
       alacritty
@@ -158,18 +160,18 @@ in {
     noto-fonts-emoji
   ];
   environment = {
-    pathsToLink = [ "/share/zsh" ];
+    pathsToLink = ["/share/zsh"];
     sessionVariables = rec {
-      XDG_CACHE_HOME  = "$HOME/.cache";
+      XDG_CACHE_HOME = "$HOME/.cache";
       XDG_CONFIG_HOME = "$HOME/.config";
-      XDG_DATA_HOME   = "$HOME/.local/share";
-      XDG_STATE_HOME  = "$HOME/.local/state";
-      XDG_BIN_HOME    = "$HOME/.local/bin";
-      PATH = [ 
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_STATE_HOME = "$HOME/.local/state";
+      XDG_BIN_HOME = "$HOME/.local/bin";
+      PATH = [
         "${XDG_BIN_HOME}"
       ];
     };
-    shells = with pkgs; [ zsh ];
+    shells = with pkgs; [zsh];
     systemPackages = with pkgs; [
       home-manager
       nix-output-monitor
@@ -190,7 +192,6 @@ in {
   # };
 
   # List services that you want to enable:
-
 
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
@@ -214,6 +215,4 @@ in {
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
-

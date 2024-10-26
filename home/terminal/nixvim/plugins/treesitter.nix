@@ -1,4 +1,4 @@
-{pkgs, config, ...}: let
+{pkgs, ...}: let
   ensure_installed = [
     "javascript"
     "typescript"
@@ -16,8 +16,8 @@
     "gitignore"
     "python"
   ];
-in{
-  home.packages = with pkgs; [ gcc tree-sitter volta ];
+in {
+  home.packages = with pkgs; [gcc tree-sitter volta];
   programs.nixvim.plugins = {
     treesitter = {
       enable = true;
@@ -32,6 +32,6 @@ in{
         indent.enable = true;
       };
     };
-    lazy.plugins = with pkgs.vimPlugins; [ nvim-treesitter hmts-nvim ];
+    lazy.plugins = with pkgs.vimPlugins; [nvim-treesitter hmts-nvim];
   };
 }
