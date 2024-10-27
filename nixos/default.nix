@@ -15,6 +15,7 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./kanata.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -124,8 +125,8 @@ in {
       };
 
       xkb = {
-        layout = "us";
-        options = "caps:escape";
+        layout = "us,ir";
+        options = "grp:shifts_toggle";
       };
     };
   };
