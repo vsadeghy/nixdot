@@ -8,6 +8,7 @@
     ./none-ls.nix
     ./completions.nix
     ./gitsigns.nix
+    ./indent-blankline.nix
   ];
   programs.nixvim.plugins = {
     lazy = {
