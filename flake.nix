@@ -38,14 +38,11 @@
     nixosConfigurations.vix = lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs;};
-      modules = [
-        ./nixos
-      ];
+      modules = [./nixos];
     };
 
     homeConfigurations.vss = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-
       extraSpecialArgs = {inherit inputs;};
       modules = [
         ./home

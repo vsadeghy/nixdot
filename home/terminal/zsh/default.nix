@@ -16,7 +16,7 @@
         "l." = "eza -d .*";
         hb = "nh home switch";
         hbb = "home-manager switch --flake ~/.nixdot";
-        sb = "sudo nh os switch";
+        sb = "nh os switch";
         sbb = "sudo nixos-rebuild switch --flake ~/.nixdot";
       };
 

@@ -51,12 +51,9 @@ in {
     };
     plugins.lazy.plugins = with pkgs.vimPlugins; [
       {
-        pkg = telescope-nvim;
-        lazy = false;
-      }
-      {
         pkg = nvim-lspconfig;
         dependencies = [
+          telescope-nvim
           {
             pkg = mason-nvim;
             config = true;
@@ -66,7 +63,7 @@ in {
             pkg = mason-tool-installer-nvim;
             opts = {inherit ensure_installed;};
           }
-          # cmp-nvim-lsp
+          cmp-nvim-lsp
           {
             pkg = fidget-nvim;
             opts = {};
@@ -127,6 +124,11 @@ in {
               }
             end
           '';
+      }
+      {
+        pkg = typescript-tools-nvim;
+        dependencies = [plenary-nvim nvim-lspconfig];
+        opts = {};
       }
     ];
   };

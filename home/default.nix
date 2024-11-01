@@ -17,6 +17,14 @@
     packages = with pkgs; [
       (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
       unzip
+      ripgrep
+      ueberzug
+      chafa
+      imagemagick
+      ffmpeg
+      ffmpegthumbnailer
+      # libjpeg
+      pcmanfm
       unrar
       obsidian
       # # You can also create simple shell scripts directly inside your
