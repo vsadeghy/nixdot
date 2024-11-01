@@ -7,6 +7,7 @@
     ./lsp.nix
     ./none-ls.nix
     ./completions.nix
+    ./gitsigns.nix
   ];
   programs.nixvim.plugins = {
     lazy = {
