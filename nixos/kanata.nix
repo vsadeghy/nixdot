@@ -17,6 +17,8 @@
           ;;M   A   C   S   S   C   A   M
           ;; capsescape
           caps esc
+          ;; spaceFn
+          spc
           )
           (defvar
             ;; Note: consider using different time values for your different fingers.
@@ -39,11 +41,13 @@
           (deflayer base
             @a  @s  @d  @f  @j  @k  @l  @;
             esc grv
+            @spc
           )
 
           (deflayer nomods
             a   s   d   f   j   k   l   ;
             esc grv
+            @spc
           )
           (deffakekeys
             to-base (layer-switch base)
@@ -62,6 +66,14 @@
             k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rctl $right-hand-keys)
             l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
             ; (tap-hold-release-keys $tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+            spc (tap-hold-release    $tap-time $hold-time (multi spc @tap) (layer-while-held fn))
+          )
+          (deflayermap fn
+            1 f1      2 f2      3 f3      4 f4      5   f5      6   f6
+            7 f7      8 f8      9 f9      0 f10     -   f11     =   f12
+            y mute    u volu    i voldwn  o prev    p   next    [   bspc    ]   del
+            h left    j down    k up      l right   '   caps    ;   (caps-word-toggle 2000)
+            n home    m pgdn    , pgup    . end
           )
         '';
       };
