@@ -3,6 +3,7 @@
     ./neotree.nix
     ./base16.nix
     ./bufferline.nix
+    ./lualine.nix
     ./treesitter.nix
     ./telescope.nix
     ./lsp.nix
