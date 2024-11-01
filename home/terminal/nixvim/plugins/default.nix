@@ -9,19 +9,14 @@
     ./completions.nix
     ./gitsigns.nix
     ./indent-blankline.nix
+    ./misc.nix
+    ./hop.nix
   ];
   programs.nixvim.plugins = {
     lazy = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
-        which-key-nvim
         vim-nix
-        {
-          pkg = nvim-autopairs;
-          event = "InsertEnter";
-          config = true;
-          opts = {};
-        }
       ];
     };
   };

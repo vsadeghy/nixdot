@@ -48,6 +48,9 @@ in {
       "gS" = [":Telescope lsp_dynamic_workspace_symbols<cr>" {desc = "Goto Workspace Symbols";}];
       "<leader>la" = [":lua vim.lsp.buf.code_action()<cr>" {desc = "Code Action";}];
       "<leader>lr" = [":lua vim.lsp.buf.rename()<cr>" {desc = "Rename";}];
+      "<leader>lj" = [":lua vim.diagnostic.goto_next{float = false}<cr>" {desc = "Next Diag";}];
+      "<leader>lk" = [":lua vim.diagnostic.goto_prev{float = false}<cr>" {desc = "Prev Diag";}];
+      "<leader>tl" = [":lua require('lsp_lines').toggle()<cr>" {desc = "LspLines";}];
     };
     plugins.lazy.plugins = with pkgs.vimPlugins; [
       {
@@ -66,6 +69,7 @@ in {
           cmp-nvim-lsp
           {
             pkg = fidget-nvim;
+            config = true;
             opts = {};
           }
         ];
