@@ -112,7 +112,7 @@ in {
         ## main
         "${mod}+Return" = "exec ${terminal}";
         "${mod}+d" = "exec --no-startup-id dmenu_run";
-        "${mod}+shift+q" = "kill";
+        "${mod}+q" = "kill";
 
         ## modes
         "${mod}+0" = ''mode "${mode_system}"'';
@@ -125,10 +125,10 @@ in {
         "${mod}+n" = "border normal";
 
         ## multimedia
-        "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   +10%   && ${refresh_i3status}";
-        "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   -10%   && ${refresh_i3status}";
-        "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@   toggle && ${refresh_i3status}";
-        "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ${refresh_i3status}";
+        "XF86AudioRaiseVolume" = "exec --no-startup-id wpctl set-volume @DEFAULT_SINK@   10%+  && ${refresh_i3status}";
+        "XF86AudioLowerVolume" = "exec --no-startup-id wpctl set-volume @DEFAULT_SINK@   10%-  && ${refresh_i3status}";
+        "XF86AudioMute" = "exec --no-startup-id pactl set-mute   @DEFAULT_SINK@   toggle && ${refresh_i3status}";
+        "XF86AudioMicMute" = "exec --no-startup-id pactl set-mute @DEFAULT_SOURCE@ toggle && ${refresh_i3status}";
 
         ## launcher
         "${mod}+b" = "exec ${browser}";
@@ -228,45 +228,43 @@ in {
       #   }
       # ];
 
-      bars =
-        # lib.forEach ["DP-1" "primary"] (tray: {
-        [
-          {
-            command = "i3bar";
-            statusCommand = "i3status-rs";
-            # trayOutput = tray;
-            colors = with config.colorScheme.palette; {
-              background = "#${base00}";
-              separator = "#${base01}";
-              statusline = "#${base04}";
-              focusedWorkspace = {
-                border = "#${base05}";
-                background = "#${base0D}";
-                text = "#${base00}";
-              };
-              activeWorkspace = {
-                border = "#${base05}";
-                background = "#${base03}";
-                text = "#${base00}";
-              };
-              inactiveWorkspace = {
-                border = "#${base03}";
-                background = "#${base01}";
-                text = "#${base05}";
-              };
-              urgentWorkspace = {
-                border = "#${base08}";
-                background = "#${base08}";
-                text = "#${base00}";
-              };
-              bindingMode = {
-                border = "#${base00}";
-                background = "#${base0A}";
-                text = "#${base00}";
-              };
+      bars = [
+        {
+          command = "i3bar";
+          statusCommand = "i3status-rs";
+          # trayOutput = tray;
+          colors = with config.colorScheme.palette; {
+            background = "#${base00}";
+            separator = "#${base01}";
+            statusline = "#${base04}";
+            focusedWorkspace = {
+              border = "#${base05}";
+              background = "#${base0D}";
+              text = "#${base00}";
             };
-          }
-        ];
+            activeWorkspace = {
+              border = "#${base05}";
+              background = "#${base03}";
+              text = "#${base00}";
+            };
+            inactiveWorkspace = {
+              border = "#${base03}";
+              background = "#${base01}";
+              text = "#${base05}";
+            };
+            urgentWorkspace = {
+              border = "#${base08}";
+              background = "#${base08}";
+              text = "#${base00}";
+            };
+            bindingMode = {
+              border = "#${base00}";
+              background = "#${base0A}";
+              text = "#${base00}";
+            };
+          };
+        }
+      ];
       #);
       colors = with config.colorScheme.palette; {
         background = "#${base07}";

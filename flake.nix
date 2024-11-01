@@ -4,6 +4,7 @@
   inputs = {
     # nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs.url = "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/nixpkgs-unstable/nixexprs.tar.xz";
+    catppuccin.url = "github:catppuccin/nix";
     nix-colors.url = "github:misterio77/nix-colors";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -24,15 +25,14 @@
     nixpkgs,
     home-manager,
     nixvim,
+    catppuccin,
     ...
   } @ inputs: let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      config = {
-        allowUnfree = true;
-      };
+      config.allowUnfree = true;
     };
   in {
     nixosConfigurations.vix = lib.nixosSystem {
@@ -47,6 +47,7 @@
       modules = [
         ./home
         nixvim.homeManagerModules.nixvim
+        catppuccin.homeManagerModules.catppuccin
       ];
     };
   };

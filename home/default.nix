@@ -2,7 +2,13 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  catppuccin = {
+    enable = true;
+    flavor = "macchiato";
+    accent = "rosewater";
+  };
+in {
   imports = [
     inputs.nix-colors.homeManagerModules.default
     ./terminal
@@ -10,6 +16,7 @@
   ];
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
   fonts.fontconfig.enable = true;
+  inherit catppuccin;
   home = {
     username = "vss";
     homeDirectory = "/home/vss";
@@ -27,6 +34,12 @@
       pcmanfm
       unrar
       obsidian
+      lxappearance
+      lazygit
+      libsForQt5.qt5ct
+      catppuccin-gtk
+      magnetic-catppuccin-gtk
+      catppuccin-qt5ct
       # # You can also create simple shell scripts directly inside your
       # # configuration. For example, this adds a command 'my-hello' to your
       # # environment:
