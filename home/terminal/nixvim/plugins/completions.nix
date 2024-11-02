@@ -18,6 +18,11 @@
             cmp-nvim-lsp
             cmp-buffer
             cmp-path
+            {
+              # pkg = codeium-nvim;
+              pkg = supermaven-nvim;
+              config = true;
+            }
           ];
           config.__raw = ''
             function()
@@ -28,6 +33,7 @@
 
               local kind_icons = {
                 Class          = "󰌗 ",
+                -- Codeium        = " ",
                 Color          = "󰏘 ",
                 Constant       = "󰏿 ",
                 Constructor    = " ",
@@ -47,6 +53,7 @@
                 Reference      = " ",
                 Snippet        = " ",
                 Struct         = "󰌗 ",
+                Supermaven     = " ",
                 Text           = "󰉿 ",
                 TypeParameter  = "󰊄 ",
                 Unit           = " ",
@@ -82,9 +89,9 @@
 
                   -- If you prefer more traditional completion keymaps,
                   -- you can uncomment the following lines
-                  --['<CR>'] = cmp.mapping.confirm { select = true },
-                  --['<Tab>'] = cmp.mapping.select_next_item(),
-                  --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+                  ['<CR>'] = cmp.mapping.confirm { select = true },
+                  ['<Tab>'] = cmp.mapping.select_next_item(),
+                  ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
                   -- Manually trigger a completion from nvim-cmp.
                   --  Generally you don't need this, because nvim-cmp will display
@@ -142,6 +149,7 @@
                   { name = 'luasnip' },
                   { name = 'buffer' },
                   { name = 'path' },
+                  -- { name = 'supermaven' },
                 },
                 formatting = {
                   fields = { 'kind', 'abbr', 'menu' },
@@ -149,6 +157,7 @@
                     vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
                     vim_item.menu = ({
                       nvim_lsp = '[LSP]',
+                      supermaven = '[AI]',
                       luasnip = '[Snippet]',
                       buffer = '[Buffer]',
                       path = '[Path]',
