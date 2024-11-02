@@ -7,7 +7,7 @@
   lua = config.lib.nixvim.toLuaObject;
   inherit (import ../maps.nix {inherit lib;}) nmap;
   servers = {
-    ts_ls = {};
+    # ts_ls = {};
     html = {filetypes = ["html" "twig" "hbs"];};
     cssls = {};
     tailwindcss = {};
@@ -71,6 +71,10 @@ in {
             pkg = fidget-nvim;
             config = true;
             opts = {};
+          }
+          {
+            pkg = typescript-tools-nvim;
+            config = true;
           }
         ];
         config.__raw =

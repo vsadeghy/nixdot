@@ -24,9 +24,10 @@ in {
             inc_rename = true;
             lsp_doc_border = false;
           };
+          messages.enabled = false;
         };
       }
     ];
-    keymaps = nmap {"<leader>n" = ["<cmd>Noice dismiss<cr>" "close notifications"];};
+    keymaps = nmap {"<C-n>" = ["<cmd>Noice dismiss<cr>" "close notifications"];};
   };
 }

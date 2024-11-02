@@ -26,7 +26,7 @@ in {
     keymaps =
       nmap {
         "<leader>g" = ["<nop>" "Git"];
-        "<leader>gg" = ["<cmd>Neogit kind=floating<cr>" "Next Hunk"];
+        "<leader>go" = ["<cmd>Neogit kind=floating<cr>" "Open Neogit"];
         "<leader>gj" = ["<cmd>Gitsigns next_hunk<cr>" "Next Hunk"];
         "<leader>gk" = ["<cmd>Gitsigns prev_hunk<cr>" "Prev Hunk"];
         "<leader>gs" = ["<cmd>Gitsigns stage_hunk<cr>" "Stage Hunk"];

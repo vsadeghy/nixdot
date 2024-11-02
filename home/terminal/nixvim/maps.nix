@@ -1,8 +1,4 @@
 {lib, ...}: let
-  opts = {
-    noremap = true;
-    silent = true;
-  };
   inherit (builtins) elemAt;
   mkMap = mode:
     lib.mapAttrsToList (key: action: {
@@ -15,6 +11,7 @@
       };
     });
 in {
+  inherit mkMap;
   nmap = mkMap "n";
   imap = mkMap "i";
   vmap = mkMap "v";

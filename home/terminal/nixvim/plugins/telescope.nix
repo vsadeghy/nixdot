@@ -23,6 +23,7 @@ in {
             pkg = nvim-web-devicons;
             enabled.__raw = "vim.g.have_nerd_font";
           }
+          git-worktree-nvim
         ];
         init.__raw = ''
           function()
@@ -31,10 +32,10 @@ in {
                 sorting_strtegy = "ascending",
                 layout_strategy = "flex",
                 file_ignore_patterns = {
-                  "node_modules",
-                  ".git",
+                  "node%_modules",
+                  "%.git",
                   "dist",
-                  "package-lock.json",
+                  "package%-lock.json",
                   "yarn.lock",
                 },
                 layout_config = {
@@ -51,11 +52,13 @@ in {
               },
             }
 
+            require("telescope").load_extension("git_worktree")
             require("telescope").load_extension("fzf")
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("media_files")
             require("telescope").load_extension("project")
             require("telescope").load_extension("undo")
+            require("telescope").load_extension("refactoring")
           end
         '';
       }
@@ -68,7 +71,7 @@ in {
       "<leader>fC" = ["<cmd>Telescope command_history<cr>" "Find Files"];
       "<leader>ft" = ["<cmd>Telescope live_grep<cr>" "Find Text"];
       "<leader>fd" = ["<cmd>Telescope diagnostics<cr>" "Find Diagnostics"];
-      "<leader>fr" = ["<cmd>Telescope oldfiles<cr>" "Find Recent Files"];
+      "<leader>fl" = ["<cmd>Telescope oldfiles<cr>" "Find Last Files"];
       "<leader>fp" = ["<cmd>Telescope project<cr>" "Find Recent Files"];
       "<leader>fw" = ["<cmd>Telescope grep_string<cr>" "Find current Word"];
       "<leader>fk" = ["<cmd>Telescope keymaps<cr>" "Find Keymaps"];
