@@ -6,7 +6,9 @@
     ./lualine.nix
     ./treesitter.nix
     ./telescope.nix
+    ./navbuddy.nix
     ./lsp.nix
+    ./barbeque.nix
     ./none-ls.nix
     ./completions.nix
     ./gitsigns.nix
