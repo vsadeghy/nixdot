@@ -8,7 +8,11 @@
     lib.mapAttrsToList (key: action: {
       inherit key mode;
       action = elemAt action 0;
-      options = opts // elemAt (action ++ [{}]) 1;
+      options = {
+        noremap = true;
+        silent = true;
+        desc = elemAt (action ++ [null]) 1;
+      };
     });
 in {
   nmap = mkMap "n";

@@ -47,9 +47,7 @@ in {
                 ["ui-select"] = {
                   require("telescope.themes").get_dropdown(),
                 },
-                media_files = {
-                  find_cmd = "rg"
-                },
+                media_files = {find_cmd = "rg"},
               },
             }
 
@@ -64,17 +62,17 @@ in {
     ];
 
     keymaps = nmap {
-      "<leader>f" = ["<nop>" {desc = "Find";}];
-      "<leader>ff" = ["<cmd>Telescope find_files<cr>" {desc = "Find Files";}];
-      "<leader>fc" = ["<cmd>Telescope commands<cr>" {desc = "Find Files";}];
-      "<leader>fC" = ["<cmd>Telescope command_history<cr>" {desc = "Find Files";}];
-      "<leader>ft" = ["<cmd>Telescope live_grep<cr>" {desc = "Find Text";}];
-      "<leader>fd" = ["<cmd>Telescope diagnostics<cr>" {desc = "Find Diagnostics";}];
-      "<leader>fr" = ["<cmd>Telescope oldfiles<cr>" {desc = "Find Recent Files";}];
-      "<leader>fp" = ["<cmd>Telescope project<cr>" {desc = "Find Recent Files";}];
-      "<leader>fw" = ["<cmd>Telescope grep_string<cr>" {desc = "Find current Word";}];
-      "<leader>fk" = ["<cmd>Telescope keymaps<cr>" {desc = "Find Keymaps";}];
-      "<leader>fh" = ["<cmd>Telescope help_tags<cr>" {desc = "Find Help";}];
+      "<leader>f" = ["<nop>" "Find"];
+      "<leader>ff" = ["<cmd>Telescope find_files<cr>" "Find Files"];
+      "<leader>fc" = ["<cmd>Telescope commands<cr>" "Find Files"];
+      "<leader>fC" = ["<cmd>Telescope command_history<cr>" "Find Files"];
+      "<leader>ft" = ["<cmd>Telescope live_grep<cr>" "Find Text"];
+      "<leader>fd" = ["<cmd>Telescope diagnostics<cr>" "Find Diagnostics"];
+      "<leader>fr" = ["<cmd>Telescope oldfiles<cr>" "Find Recent Files"];
+      "<leader>fp" = ["<cmd>Telescope project<cr>" "Find Recent Files"];
+      "<leader>fw" = ["<cmd>Telescope grep_string<cr>" "Find current Word"];
+      "<leader>fk" = ["<cmd>Telescope keymaps<cr>" "Find Keymaps"];
+      "<leader>fh" = ["<cmd>Telescope help_tags<cr>" "Find Help"];
       "<leader>/" = [
         {
           __raw = ''
@@ -86,7 +84,7 @@ in {
             end
           '';
         }
-        {desc = "Find Text";}
+        "Find Text"
       ];
       # "/" = [
       #   {
@@ -98,8 +96,7 @@ in {
       #         })
       #       end
       #     '';
-      #   }
-      #   {desc = "Find Text";}
+      #   } "Find Text"
       # ];
     };
   };

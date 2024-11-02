@@ -25,30 +25,30 @@ in {
     ];
     keymaps =
       nmap {
-        "<leader>g" = ["<nop>" {desc = "Git";}];
-        "<leader>gg" = [":Neogit kind=floating<cr>" {desc = "Next Hunk";}];
-        "<leader>gj" = [":Gitsigns next_hunk<cr>" {desc = "Next Hunk";}];
-        "<leader>gk" = [":Gitsigns prev_hunk<cr>" {desc = "Prev Hunk";}];
-        "<leader>gs" = [":Gitsigns stage_hunk<cr>" {desc = "Stage Hunk";}];
-        "<leader>gr" = [":Gitsigns reset_hunk<cr>" {desc = "Reset Hunk";}];
-        "<leader>gS" = [":Gitsigns stage_buffer<cr>" {desc = "Stage Buffer";}];
-        "<leader>gu" = [":Gitsigns undo_stage_hunk<cr>" {desc = "Undo Stage Hunk";}];
-        "<leader>gp" = [":Gitsigns preview_hunk<cr>" {desc = "Preview Hunk";}];
-        "<leader>gb" = [":Gitsigns blame_line full=true<cr>" {desc = "Blame Line";}];
-        "<leader>tb" = [":Gitsigns toggle_current_line_blame<cr>" {desc = "Line Blame";}];
-        "<leader>gh" = [":Gitsigns git_branches<cr>" {desc = "Branches";}];
-        "<leader>gc" = [":Telescope git_commits<cr>" {desc = "Commits";}];
-        "<leader>gC" = [":Telescope git_bcommits<cr>" {desc = "Branch Commits";}];
-        "<leader>g?" = [":Telescope git_status<cr>" {desc = "Status";}];
-        "<leader>gd" = [":Gitsigns diffthis<cr>" {desc = "diff";}];
-        "<leader>gD" = [":Gitsigns diffthis '~'<cr>" {desc = "diff w/ Head";}];
-        "<leader>td" = [":Gitsigns toggle_deleted<cr>" {desc = "Toggle Deleted";}];
+        "<leader>g" = ["<nop>" "Git"];
+        "<leader>gg" = ["<cmd>Neogit kind=floating<cr>" "Next Hunk"];
+        "<leader>gj" = ["<cmd>Gitsigns next_hunk<cr>" "Next Hunk"];
+        "<leader>gk" = ["<cmd>Gitsigns prev_hunk<cr>" "Prev Hunk"];
+        "<leader>gs" = ["<cmd>Gitsigns stage_hunk<cr>" "Stage Hunk"];
+        "<leader>gr" = ["<cmd>Gitsigns reset_hunk<cr>" "Reset Hunk"];
+        "<leader>gS" = ["<cmd>Gitsigns stage_buffer<cr>" "Stage Buffer"];
+        "<leader>gu" = ["<cmd>Gitsigns undo_stage_hunk<cr>" "Undo Stage Hunk"];
+        "<leader>gp" = ["<cmd>Gitsigns preview_hunk<cr>" "Preview Hunk"];
+        "<leader>gb" = ["<cmd>Gitsigns blame_line full=true<cr>" "Blame Line"];
+        "<leader>tb" = ["<cmd>Gitsigns toggle_current_line_blame<cr>" "Line Blame"];
+        "<leader>gh" = ["<cmd>Gitsigns git_branches<cr>" "Branches"];
+        "<leader>gc" = ["<cmd>Telescope git_commits<cr>" "Commits"];
+        "<leader>gC" = ["<cmd>Telescope git_bcommits<cr>" "Branch Commits"];
+        "<leader>g?" = ["<cmd>Telescope git_status<cr>" "Status"];
+        "<leader>gd" = ["<cmd>Gitsigns diffthis<cr>" "diff"];
+        "<leader>gD" = ["<cmd>Gitsigns diffthis '~'<cr>" "diff w/ Head"];
+        "<leader>td" = ["<cmd>Gitsigns toggle_deleted<cr>" "Toggle Deleted"];
       }
       ++ vmap {
-        "<leader>g" = ["<nop>" {desc = "Git";}];
-        "<leader>gs" = [":Gitsigns stage_hunk<cr>" {desc = "Stage Hunk";}];
-        "<leader>gr" = [":Gitsigns reset_hunk<cr>" {desc = "Reset Hunk";}];
-        "<leader>gu" = [":Gitsigns undo_stage_hunk<cr>" {desc = "Undo Stage Hunk";}];
+        "<leader>g" = ["<nop>" "Git"];
+        "<leader>gs" = ["<cmd>Gitsigns stage_hunk<cr>" "Stage Hunk"];
+        "<leader>gr" = ["<cmd>Gitsigns reset_hunk<cr>" "Reset Hunk"];
+        "<leader>gu" = ["<cmd>Gitsigns undo_stage_hunk<cr>" "Undo Stage Hunk"];
       };
   };
 }

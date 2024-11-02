@@ -39,18 +39,18 @@ in {
   home.packages = with pkgs; [typescript cargo];
   programs.nixvim = {
     keymapsOnEvents.LspAttach = nmap {
-      "gd" = [":Telescope lsp_definitions<cr>" {desc = "Goto Definition";}];
-      "gr" = [":Telescope lsp_references<cr>" {desc = "Goto References";}];
-      "gi" = [":Telescope lsp_implementations<cr>" {desc = "Goto Implementation";}];
-      "gT" = [":Telescope lsp_type_definitions<cr>" {desc = "Goto Type definitions";}];
-      "gD" = [":lua vim.lsp.buf.declaration()<cr>" {desc = "Goto Declaration";}];
-      "gs" = [":Telescope lsp_document_symbols<cr>" {desc = "Goto Symbols";}];
-      "gS" = [":Telescope lsp_dynamic_workspace_symbols<cr>" {desc = "Goto Workspace Symbols";}];
-      "<leader>la" = [":lua vim.lsp.buf.code_action()<cr>" {desc = "Code Action";}];
-      "<leader>lr" = [":lua vim.lsp.buf.rename()<cr>" {desc = "Rename";}];
-      "<leader>lj" = [":lua vim.diagnostic.goto_next{float = false}<cr>" {desc = "Next Diag";}];
-      "<leader>lk" = [":lua vim.diagnostic.goto_prev{float = false}<cr>" {desc = "Prev Diag";}];
-      "<leader>tl" = [":lua require('lsp_lines').toggle()<cr>" {desc = "LspLines";}];
+      "gd" = ["<cmd>Telescope lsp_definitions<cr>" "Goto Definition"];
+      "gr" = ["<cmd>Telescope lsp_references<cr>" "Goto References"];
+      "gi" = ["<cmd>Telescope lsp_implementations<cr>" "Goto Implementation"];
+      "gT" = ["<cmd>Telescope lsp_type_definitions<cr>" "Goto Type definitions"];
+      "gD" = ["<cmd>lua vim.lsp.buf.declaration()<cr>" "Goto Declaration"];
+      "gs" = ["<cmd>Telescope lsp_document_symbols<cr>" "Goto Symbols"];
+      "gS" = ["<cmd>Telescope lsp_dynamic_workspace_symbols<cr>" "Goto Workspace Symbols"];
+      "<leader>la" = ["<cmd>lua vim.lsp.buf.code_action()<cr>" "Code Action"];
+      "<leader>lr" = ["<cmd>lua vim.lsp.buf.rename()<cr>" "Rename"];
+      "<leader>lj" = ["<cmd>lua vim.diagnostic.goto_next{float = false}<cr>" "Next Diag"];
+      "<leader>lk" = ["<cmd>lua vim.diagnostic.goto_prev{float = false}<cr>" "Prev Diag"];
+      "<leader>tl" = ["<cmd>lua require('lsp_lines').toggle()<cr>" "LspLines"];
     };
     plugins.lazy.plugins = with pkgs.vimPlugins; [
       {

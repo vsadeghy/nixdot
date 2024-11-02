@@ -14,19 +14,19 @@ in {
       }
     ];
     keymaps = nmap {
-      s = [":HopCamelCaseMW<cr>"];
-      S = [":HopChar2MW<cr>"];
-      f = [":HopChar1CurrentLineAC<cr>"];
-      F = [":HopChar1CurrentLineBC<cr>"];
-      "<leader>j" = ["<nop>" {desc = "Jump";}];
-      "<leader>jw" = [":HopWordMW<cr>" {desc = "Jump Word";}];
-      "<leader>jl" = [":HopLineStartMW<cr>" {desc = "Jump Line ^";}];
-      "<leader>jL" = [":HopLineMW<cr>" {desc = "Jump Line 0";}];
-      "<leader>j/" = [":HopAnywhereMW<cr>" {desc = "Find Char";}];
-      "<leader>jf" = [":HopChar1CurrentLineAC<cr>" {desc = "Find Forwards";}];
-      "<leader>jF" = [":HopChar1CurrentLineBC<cr>" {desc = "Find Backwards";}];
-      "<leader>jy" = [":HopYankChar1MW<cr>" {desc = "Yank";}];
-      "<leader>jp" = [":HopPasteChar1MW<cr>" {desc = "Paste";}];
+      s = ["<cmd>HopCamelCaseMW<cr>"];
+      S = ["<cmd>HopChar2MW<cr>"];
+      f = ["<cmd>HopChar1CurrentLineAC<cr>"];
+      F = ["<cmd>HopChar1CurrentLineBC<cr>"];
+      "<leader>j" = ["<nop>" "Jump"];
+      "<leader>jw" = ["<cmd>HopWordMW<cr>" "Jump Word"];
+      "<leader>jl" = ["<cmd>HopLineStartMW<cr>" "Jump Line ^"];
+      "<leader>jL" = ["<cmd>HopLineMW<cr>" "Jump Line 0"];
+      "<leader>j/" = ["<cmd>HopAnywhereMW<cr>" "Find Char"];
+      "<leader>jf" = ["<cmd>HopChar1CurrentLineAC<cr>" "Find Forwards"];
+      "<leader>jF" = ["<cmd>HopChar1CurrentLineBC<cr>" "Find Backwards"];
+      "<leader>jy" = ["<cmd>HopYankChar1MW<cr>" "Yank"];
+      "<leader>jp" = ["<cmd>HopPasteChar1MW<cr>" "Paste"];
     };
   };
 }

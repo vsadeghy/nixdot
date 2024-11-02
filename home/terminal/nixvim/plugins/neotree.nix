@@ -6,7 +6,7 @@
   maps = import ../maps.nix {inherit lib;};
 in {
   programs.nixvim = {
-    keymaps = maps.nmap {"<leader>e" = [":Neotree toggle<cr>" {desc = "Toggle Explorer";}];};
+    keymaps = maps.nmap {"<leader>e" = ["<cmd>Neotree toggle<cr>" "Toggle Explorer"];};
     plugins.lazy.plugins = with pkgs.vimPlugins; [
       {
         pkg = neo-tree-nvim;

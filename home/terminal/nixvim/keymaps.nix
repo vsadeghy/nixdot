@@ -12,11 +12,11 @@ in {
         "<Space>" = ["<Nop>"];
         "gx" = ["<Nop>"];
 
-        "<leader>s" = [":write<cr>" {desc = "Save File";}];
-        "<leader>x" = [":quit<cr>" {desc = "Quit File";}];
+        "<leader>s" = ["<cmd>write<cr>" "Save File"];
+        "<leader>x" = ["<cmd>quit<cr>" "Quit File"];
 
         # save file without auto-formatting
-        "<leader>S" = [":noautocmd w<cr>"];
+        "<leader>S" = ["<cmd>noautocmd w<cr>"];
 
         # delete single character without copying into register
         "x" = [''"_x''];
@@ -39,88 +39,63 @@ in {
         "H" = ["^"];
 
         # Resize with arrows
-        "<Up>" = [":resize -2<cr>"];
-        "<Down>" = [":resize +2<cr>"];
-        "<Left>" = [":vertical resize -2<cr>"];
-        "<Right>" = [":vertical resize +2<cr>"];
+        "<Up>" = ["<cmd>resize -2<cr>"];
+        "<Down>" = ["<cmd>resize +2<cr>"];
+        "<Left>" = ["<cmd>vertical resize -2<cr>"];
+        "<Right>" = ["<cmd>vertical resize +2<cr>"];
 
         # Buffers
-        "<Tab>" = [":bnext<cr>"];
-        "<S-Tab>" = [":bprevious<cr>"];
-        "<leader>q" = [":bdelete!<cr>" {desc = "Close Buffer";}];
-        "<leader>b" = [":enew<cr>" {desc = "New Buffer";}];
+        "<Tab>" = ["<cmd>bnext<cr>"];
+        "<S-Tab>" = ["<cmd>bprevious<cr>"];
+        "<leader>q" = ["<cmd>bdelete!<cr>" "Close Buffer"];
+        "<leader>b" = ["<cmd>enew<cr>" "New Buffer"];
 
         # Window management
-        "<leader>w" = ["<Nop>" {desc = "Window";}];
-        "<leader>wv" = ["<C-w>v" {desc = "Split Vertically";}];
-        "<leader>wh" = ["<C-w>s" {desc = "Split Horizontally";}];
-        "<leader>w=" = ["<C-w>=" {desc = "Equal Splits";}];
-        "<leader>wq" = [":close<cr>" {desc = "Close window";}];
+        "<leader>w" = ["<Nop>" "Window"];
+        "<leader>wv" = ["<C-w>v" "Split Vertically"];
+        "<leader>wh" = ["<C-w>s" "Split Horizontally"];
+        "<leader>w=" = ["<C-w>=" "Equal Splits"];
+        "<leader>wq" = ["<cmd>close<cr>" "Close window"];
 
         # Navigate between splits
-        "<C-k>" = [":wincmd k<cr>"];
-        "<C-j>" = [":wincmd j<cr>"];
-        "<C-h>" = [":wincmd h<cr>"];
-        "<C-l>" = [":wincmd l<cr>"];
+        "<C-k>" = ["<cmd>wincmd k<cr>"];
+        "<C-j>" = ["<cmd>wincmd j<cr>"];
+        "<C-h>" = ["<cmd>wincmd h<cr>"];
+        "<C-l>" = ["<cmd>wincmd l<cr>"];
 
         # move current line up/down
-        "<M-k>" = [":move-2<cr>"];
-        "<M-j>" = [":move+<cr>"];
+        "<M-k>" = ["<cmd>move-2<cr>"];
+        "<M-j>" = ["<cmd>move+<cr>"];
 
         # Tabs
-        "<leader>t" = [
-          "<Nop>"
-          {
-            noremap = false;
-            desc = "Tab";
-          }
-        ];
-        "<leader>to" = [":tabedit<cr>" {desc = "Open New tab";}];
-        "<leader>tq" = [":tabclose<cr>" {desc = "Close tab";}];
-        "<leader>tn" = [":tabnext<cr>" {desc = "Next tab";}];
-        "<leader>tp" = [":tabprevious<cr>" {desc = "Previous tab";}];
-
-        # Toggle line wrapping <cr>
-        "<leader>T" = [
-          "<Nop>"
-          {
-            noremap = false;
-            desc = "Toggle";
-          }
-        ];
-        "<leader>Tw" = [":set wrap!<cr>" {desc = "Toggle Line Wrap";}];
-        "<leader>Th" = [":set hlsearch!<cr>" {desc = "Toggle Highlight Search";}];
+        "<leader>t" = ["<Nop>" "toggle"];
+        "<leader>tw" = ["<cmd>set wrap!<cr>" "Toggle Line Wrap"];
+        "<leader>th" = ["<cmd>set hlsearch!<cr>" "Toggle Highlight Search"];
 
         # Diagnostic keymaps
         "[d" = [
           {__raw = "vim.diagnostic.goto_prev";}
-          {desc = "Go to previous diagnostic message";}
+          "Go to previous diagnostic message"
         ];
         "]d" = [
           {__raw = "vim.diagnostic.goto_next";}
-          {desc = "Go to next diagnostic message";}
+          "Go to next diagnostic message"
         ];
-        "<leader>l" = [
-          "<Nop>"
-          {
-            noremap = false;
-            desc = "LSP";
-          }
-        ];
+        "<leader>l" = ["<Nop>" "LSP"];
         "<leader>ld" = [
           {__raw = "vim.diagnostic.open_float";}
-          {desc = "Open floating diagnostic message";}
+          "Open floating diagnostic message"
         ];
         "<leader>lq" = [
           {__raw = "vim.diagnostic.setloclist";}
-          {desc = "Open diagnostics list";}
+          "Open diagnostics list"
         ];
 
         # Easy comment
         # "<leader>/" = [ "gcc" ];
 
         # Use Menu key to cycle with the recent file
-        "" = [":b#<cr>"];
+        "" = ["<cmd>b#<cr>"];
       };
 
       visual = vmap {
@@ -137,8 +112,8 @@ in {
         # Keep last yanked when pasting
 
         # Move selected line / block of text in visual mode
-        "K" = [":m '<-2<cr>gv=gv"];
-        "J" = [":m '>+1<cr>gv=gv"];
+        "K" = ["<cmd>m '<-2<cr>gv=gv"];
+        "J" = ["<cmd>m '>+1<cr>gv=gv"];
 
         # Easy comment
         # "<leader>/" = [ "gc" ];
@@ -149,7 +124,7 @@ in {
         "kj" = ["<esc>"];
 
         # Use Menu key to cycle with the recent file
-        "" = [":b#<cr>"];
+        "" = ["<cmd>b#<cr>"];
       };
     in (normal ++ visual ++ insert);
   };

@@ -27,6 +27,6 @@ in {
         };
       }
     ];
-    keymaps = nmap {"<leader>n" = ["<cmd>Noice dismiss<cr>" {desc = "close notifications";}];};
+    keymaps = nmap {"<leader>n" = ["<cmd>Noice dismiss<cr>" "close notifications"];};
   };
 }
