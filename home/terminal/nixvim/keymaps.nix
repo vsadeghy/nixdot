@@ -58,10 +58,10 @@ in {
         "<leader>wq" = ["<cmd>close<cr>" "Close window"];
 
         # Navigate between splits
-        "<C-k>" = ["<cmd>wincmd k<cr>"];
-        "<C-j>" = ["<cmd>wincmd j<cr>"];
-        "<C-h>" = ["<cmd>wincmd h<cr>"];
-        "<C-l>" = ["<cmd>wincmd l<cr>"];
+        # "<C-k>" = ["<cmd>wincmd k<cr>"];
+        # "<C-j>" = ["<cmd>wincmd j<cr>"];
+        # "<C-h>" = ["<cmd>wincmd h<cr>"];
+        # "<C-l>" = ["<cmd>wincmd l<cr>"];
 
         # move current line up/down
         "<M-k>" = ["<cmd>move-2<cr>"];
