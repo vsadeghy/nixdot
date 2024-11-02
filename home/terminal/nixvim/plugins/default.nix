@@ -13,6 +13,7 @@
     ./completions.nix
     ./gitsigns.nix
     ./indent-blankline.nix
+    ./noice.nix
     ./misc.nix
     ./hop.nix
   ];

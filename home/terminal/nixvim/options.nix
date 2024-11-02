@@ -46,7 +46,7 @@
       title = true;
       listchars = "eol:¬,tab:>-,trail:~,extends:>,precedes:<";
       list = true;
-      lazyredraw = true;
+      lazyredraw = false;
       hidden = true;
     };
 
