@@ -66,9 +66,12 @@ in {
     keymaps = nmap {
       "<leader>f" = ["<nop>" {desc = "Find";}];
       "<leader>ff" = ["<cmd>Telescope find_files<cr>" {desc = "Find Files";}];
+      "<leader>fc" = ["<cmd>Telescope commands<cr>" {desc = "Find Files";}];
+      "<leader>fC" = ["<cmd>Telescope command_history<cr>" {desc = "Find Files";}];
       "<leader>ft" = ["<cmd>Telescope live_grep<cr>" {desc = "Find Text";}];
       "<leader>fd" = ["<cmd>Telescope diagnostics<cr>" {desc = "Find Diagnostics";}];
       "<leader>fr" = ["<cmd>Telescope oldfiles<cr>" {desc = "Find Recent Files";}];
+      "<leader>fp" = ["<cmd>Telescope project<cr>" {desc = "Find Recent Files";}];
       "<leader>fw" = ["<cmd>Telescope grep_string<cr>" {desc = "Find current Word";}];
       "<leader>fk" = ["<cmd>Telescope keymaps<cr>" {desc = "Find Keymaps";}];
       "<leader>fh" = ["<cmd>Telescope help_tags<cr>" {desc = "Find Help";}];
@@ -85,19 +88,19 @@ in {
         }
         {desc = "Find Text";}
       ];
-      "/" = [
-        {
-          __raw = ''
-            function()
-              require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-                winblend = 10,
-                previewer =  false,
-              })
-            end
-          '';
-        }
-        {desc = "Find Text";}
-      ];
+      # "/" = [
+      #   {
+      #     __raw = ''
+      #       function()
+      #         require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+      #           winblend = 10,
+      #           previewer =  false,
+      #         })
+      #       end
+      #     '';
+      #   }
+      #   {desc = "Find Text";}
+      # ];
     };
   };
 }

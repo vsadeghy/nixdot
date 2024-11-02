@@ -16,7 +16,8 @@ in {
     keymaps = nmap {
       s = [":HopCamelCaseMW<cr>"];
       S = [":HopChar2MW<cr>"];
-      f = [":HopChar1CurrentLine<cr>" {desc = "Find";}];
+      f = [":HopChar1CurrentLineAC<cr>"];
+      F = [":HopChar1CurrentLineBC<cr>"];
       "<leader>j" = ["<nop>" {desc = "Jump";}];
       "<leader>jw" = [":HopWordMW<cr>" {desc = "Jump Word";}];
       "<leader>jl" = [":HopLineStartMW<cr>" {desc = "Jump Line ^";}];
