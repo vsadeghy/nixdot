@@ -15,7 +15,6 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./kanata.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -105,6 +104,20 @@ in {
       xkb = {
         layout = "us,ir";
         options = "grp:shifts_toggle";
+      };
+    };
+
+    kanata = {
+      enable = true;
+      keyboards = {
+        homerow-extended = {
+          extraDefCfg = ''
+            process-unmapped-keys yes
+            concurrent-tap-hold yes
+            chords-v2-min-idle-experimental 50
+          '';
+          config = builtins.readFile ./kanata.kbd;
+        };
       };
     };
   };

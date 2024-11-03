@@ -15,6 +15,7 @@
     "bash"
     "gitignore"
     "python"
+    "clojure"
   ];
 in {
   home.packages = with pkgs; [gcc tree-sitter volta];

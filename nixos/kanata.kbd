@@ -1,0 +1,127 @@
+
+;;
+;;  Learn Colemak, a few keys at a time.
+;;
+;;  The "j" key moves around the keyboard each step,
+;;  until you reach the full Colemak layout.
+;;
+;;  To select the layout for your current step, press the
+;;  letter "m" and the number of your current step, as a chord.
+;;
+;;  Check out:  https://dreymar.colemak.org/tarmak-intro.html
+;;        and:  https://colemak.com
+;;
+
+(defsrc
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps   a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft      z    x    c    v    b    n    m    ,    .    /
+                               spc
+)
+
+(defvar
+  ;; Note: consider using different time values for your different fingers.
+  ;; For example, your pinkies might be slower to release keys and index
+  ;; fingers faster.
+  tap-timeout 200
+  hold-timeout 150
+  hold-timeout-long 200
+  tt $tap-timeout
+  ht $hold-timeout
+  htl $hold-timeout-long
+
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+  )
+)
+
+(defalias
+  { S-[
+  } S-]
+  : S-;
+  | S-\
+  < S-,
+  > S-.
+)
+
+(deflayer base
+  grv  1     2     3     4       5      6     7     8     9     0      -       =   bspc
+  @ntb  q     w     e     r       t      y     u     i     o     p      [       ]     \
+  @ext   @a    @s    @d    @f      g      h     @j    @k    @l    @;     '     ret
+  lsft       x     c     v      b     z     n     m     ,     .     /
+                                     @spc
+) 
+
+(deflayer extended
+  esc  f1    f2    f3    f4     f5      f6    f7    f8    f9    f10    f11     f12   brk
+  _     esc   @mwu  bck   fwd    @mau    pgup  home  up    end   del    volu    brk   ins
+  _      lalt   @mwd  lctl  lsft  @mad    pgdn  left  down  rght  bspc   voldwn   prnt
+  _          C-x   C-c   C-v   C-z  mmid   mlft  mrgt  @mal  @mar  XX
+                                     ret
+)
+
+(deflayer numtab
+  esc  1     2     3     4      5       6     kp7   kp8   kp9   kp-    -       =     bspc
+  _     esc   @mwu  XX    XX     @mau    kp/   kp4   kp5   kp6   kp+    [       ]     \
+  _      lalt   @mwd  lctl  lsft  @mad    kp*   kp1   kp2   kp3   kp+    kprt     kprt
+  _          C-x   C-c   C-v   C-z  nlk    @:    kp0   ,     kp.   kp=
+                                     spc
+)
+
+(deflayer spacer
+  grv  1     2     3     4       5      6     7     8     9     0      -       =   bspc
+  @ntb  S-1   S-2   S-3   S-4     S-5    S-6   S-7   S-8   S-9   S-0    -       ]     @|
+  @ext    1     2     3     4      5      6      7     8     9     0     =     ret
+  lsft       [     ]     @{     @}    z     [     ]     @<    @>   /
+                                     _
+)
+
+(deflayer nomods
+  grv  1     2     3     4       5      6     7     8     9     0      -       =   bspc
+  tab   q     w     e     r       t      y     u     i     o     p      [       ]     \
+  esc     a     s     d     f      g      h      j     k     l     ;     '     ret
+  lsft       x     c     v      b     z     n     m     ,     .     /
+                                     spc
+)
+
+(deffakekeys to-base (layer-switch base))
+(defalias
+  tap (multi
+    (layer-switch nomods)
+    (on-idle-fakekey to-base tap 20)
+  )
+
+  ;; mousewheel: interval, distance
+  mwu (mwheel-up 50 120)
+  mwd (mwheel-down 50 120)
+
+  ;; mouseaccel: interval, accelTime, minDistance, maxDistance
+  mau (movemouse-accel-up 1 1000 1 3)
+  mad (movemouse-accel-down 1 1000 1 3)
+  mal (movemouse-accel-left 1 1000 1 3)
+  mar (movemouse-accel-right 1 1000 1 3)
+
+  a (tap-hold-release-keys $tt $htl (multi a @tap) lmet $left-hand-keys)
+  s (tap-hold-release-keys $tt $ht  (multi s @tap) lalt $left-hand-keys)
+  d (tap-hold-release-keys $tt $ht  (multi d @tap) lctl $left-hand-keys)
+  f (tap-hold-release-keys $tt $ht  (multi f @tap) lsft $left-hand-keys)
+  j (tap-hold-release-keys $tt $ht  (multi j @tap) rsft $right-hand-keys)
+  k (tap-hold-release-keys $tt $ht  (multi k @tap) rctl $right-hand-keys)
+  l (tap-hold-release-keys $tt $ht  (multi l @tap) ralt $right-hand-keys)
+  ; (tap-hold-release-keys $tt $htl (multi ; @tap) rmet $right-hand-keys)
+  ext (tap-hold-release    $tt $htl (multi esc @tap) (layer-while-held extended))
+  ntb (tap-hold-release    $tt $htl (multi tab @tap) (layer-while-held numtab))
+  spacer (tap-hold-release    $tt $ht (multi spc @tap) (layer-while-held spacer))
+  spc (fork @spacer spc (lctl rctl))
+)
+(defchordsv2-experimental
+  (q w) esc 100 all-released (extended)
+)

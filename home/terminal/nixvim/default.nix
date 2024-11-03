@@ -21,5 +21,8 @@
     # };
     vimAlias = true;
     luaLoader.enable = true;
+    filetype.pattern = {
+      ".*.kbd" = "clojure";
+    };
   };
 }

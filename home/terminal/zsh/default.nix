@@ -17,6 +17,7 @@
         hb = "nh home switch";
         hbb = "home-manager switch --flake ~/.nixdot";
         sb = "nh os switch";
+        st = "nh os test";
         sbb = "sudo nixos-rebuild switch --flake ~/.nixdot";
       };
 
