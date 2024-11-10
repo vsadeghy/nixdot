@@ -23,6 +23,10 @@ in {
     stateVersion = "24.05";
     packages = with pkgs; [
       (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
+      htop
+      firefox
+      zenith
+      nix-top
       unzip
       ripgrep
       ueberzug
@@ -40,6 +44,8 @@ in {
       catppuccin-gtk
       magnetic-catppuccin-gtk
       catppuccin-qt5ct
+      mpv
+      pcmanfm
       # # You can also create simple shell scripts directly inside your
       # # configuration. For example, this adds a command 'my-hello' to your
       # # environment:

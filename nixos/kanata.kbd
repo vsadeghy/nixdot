@@ -13,11 +13,11 @@
 ;;
 
 (defsrc
-  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps   a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft      z    x    c    v    b    n    m    ,    .    /
-                               spc
+   esc  1 2 3 4 5 6 7 8 9 0 - = bspc
+   tab  q w e r t y u i o p [ ] \
+   caps a s d f g h j k l ; ' ret
+   lsft z x c v b n m , . /
+   spc
 )
 
 (defvar
@@ -85,11 +85,11 @@
 )
 
 (deflayer nomods
-  grv  1     2     3     4       5      6     7     8     9     0      -       =   bspc
-  tab   q     w     e     r       t      y     u     i     o     p      [       ]     \
-  esc     a     s     d     f      g      h      j     k     l     ;     '     ret
-  lsft       x     c     v      b     z     n     m     ,     .     /
-                                     spc
+  grv     1     2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab     q     w     e     r     t     y     u     i     o     p     [     ]     \
+  esc     a     s     d     f     g     h     j     k     l     ;     '     ret
+  lsft    x     c     v     b     z     n     m     ,     .     /
+  spc
 )
 
 (deffakekeys to-base (layer-switch base))

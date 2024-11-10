@@ -6,6 +6,7 @@
     nixpkgs.url = "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/nixpkgs-unstable/nixexprs.tar.xz";
     catppuccin.url = "github:catppuccin/nix";
     nix-colors.url = "github:misterio77/nix-colors";
+    nur.url = "github:nix-community/NUR";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +27,7 @@
     home-manager,
     nixvim,
     catppuccin,
+    nur,
     ...
   } @ inputs: let
     lib = nixpkgs.lib;
@@ -38,7 +40,7 @@
     nixosConfigurations.vix = lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs;};
-      modules = [./nixos];
+      modules = [./nixos nur.nixosModules.nur];
     };
 
     homeConfigurations.vss = home-manager.lib.homeManagerConfiguration {
@@ -48,6 +50,7 @@
         ./home
         nixvim.homeManagerModules.nixvim
         catppuccin.homeManagerModules.catppuccin
+        nur.nixosModules.nur
       ];
     };
   };

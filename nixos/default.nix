@@ -71,7 +71,7 @@ in {
     # keyMap = "us";
     useXkbConfig = true; # use xkb.options in tty.
   };
-
+  security.polkit.enable = true;
   services = {
     # openssh.enable = true;
     pipewire = {
@@ -137,8 +137,6 @@ in {
       neovim
       gh
       stow
-      nekoray
-      xray
       tlrc
       xorg.libxcb
     ];
