@@ -36,7 +36,7 @@
   };
   ensure_installed = ["stylua"] ++ lib.attrsets.mapAttrsToList (name: _: name) servers;
 in {
-  home.packages = with pkgs; [typescript cargo];
+  home.packages = with pkgs; [typescript cargo nodePackages_latest.nodejs nodePackages_latest.pnpm];
   programs.nixvim = {
     keymapsOnEvents.LspAttach = nmap {
       "gd" = ["<cmd>Telescope lsp_definitions<cr>" "Goto Definition"];
@@ -74,7 +74,17 @@ in {
           }
           {
             pkg = typescript-tools-nvim;
-            config = true;
+            opts = {
+              on_attach.__raw = ''
+                function(client, bufnr)
+                  client.server_capabilities.documentFormattingProvider = false
+                  client.server_capabilities.documentRangeFormattingProvider = false
+                end
+              '';
+              settings = {
+                expose_as_code_action = "all";
+              };
+            };
           }
         ];
         config.__raw =
