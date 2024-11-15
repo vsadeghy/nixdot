@@ -40,7 +40,7 @@
       completeopt = "menuone,noselect"; # Set completeopt to have a better completion experience (default: "menu,preview")
       termguicolors = true; # Set termguicolors to enable highlight groups (default: false)
       shortmess = "ltToOCFc"; # Don"t give |ins-completion-menu| messages (default: does not include "c")
-      iskeyword = "@,38-57,_,192-255,-"; # Hyphenated words recognized by searches (default: does not include "-")
+      # iskeyword = "@,38-57,_,192-255,-"; # Hyphenated words recognized by searches (default: does not include "-")
       formatoptions = "ql"; # Don"t insert the current comment leader automatically for auto-wrapping comments using "(t)extwidth", hitting <Ente(r)> in insert mode, or hitting "o" or "O" in normal mode. (default: "croql")
       # vim.opt.runtimepath:remove "/usr/share/vim/vimfiles"; # separate vim plugins from neovim in case vim still in use (default: includes this path if vim is installed)
       title = true;

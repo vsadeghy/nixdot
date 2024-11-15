@@ -22,7 +22,7 @@
               # pkg = codeium-nvim;
               pkg = supermaven-nvim;
               opts.keymaps = {
-                accept_suggestion = "<C-down>";
+                accept_suggestion = "<right>";
                 accept_word = "<C-right>";
                 clear_suggestion = "<C-left>";
               };

@@ -76,19 +76,19 @@ in {
       "<leader>fw" = ["<cmd>Telescope grep_string<cr>" "Find current Word"];
       "<leader>fk" = ["<cmd>Telescope keymaps<cr>" "Find Keymaps"];
       "<leader>fh" = ["<cmd>Telescope help_tags<cr>" "Find Help"];
-      "<leader>/" = [
-        {
-          __raw = ''
-            function()
-              require("telescope.builtin").live_grep ({
-                grep_open_files = true,
-                prompt_title = "Live Grep in Open Files",
-              })
-            end
-          '';
-        }
-        "Find Text"
-      ];
+      # "<leader>/" = [
+      #   {
+      #     __raw = ''
+      #       function()
+      #         require("telescope.builtin").live_grep ({
+      #           grep_open_files = true,
+      #           prompt_title = "Live Grep in Open Files",
+      #         })
+      #       end
+      #     '';
+      #   }
+      #   "Find Text"
+      # ];
       # "/" = [
       #   {
       #     __raw = ''

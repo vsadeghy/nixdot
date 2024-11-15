@@ -58,14 +58,14 @@ in {
         "<leader>wq" = ["<cmd>close<cr>" "Close window"];
 
         # Navigate between splits
-        # "<C-k>" = ["<cmd>wincmd k<cr>"];
-        # "<C-j>" = ["<cmd>wincmd j<cr>"];
-        # "<C-h>" = ["<cmd>wincmd h<cr>"];
-        # "<C-l>" = ["<cmd>wincmd l<cr>"];
+        "<C-k>" = ["<cmd>wincmd k<cr>"];
+        "<C-j>" = ["<cmd>wincmd j<cr>"];
+        "<C-h>" = ["<cmd>wincmd h<cr>"];
+        "<C-l>" = ["<cmd>wincmd l<cr>"];
 
         # move current line up/down
-        "<M-k>" = ["<cmd>move-2<cr>"];
-        "<M-j>" = ["<cmd>move+<cr>"];
+        # "<M-k>" = ["<cmd>move-2==<cr>"];
+        # "<M-j>" = ["<cmd>move+==<cr>"];
 
         # Tabs
         "<leader>t" = ["<Nop>" "toggle"];
@@ -92,7 +92,7 @@ in {
         ];
 
         # Easy comment
-        # "<leader>/" = [ "gcc" ];
+        "<leader>/" = ["gcc" "comment" {remap = true;}];
 
         # Use Menu key to cycle with the recent file
         "" = ["<cmd>b#<cr>"];
@@ -116,7 +116,7 @@ in {
         "J" = ["<cmd>m '>+1<cr>gv=gv"];
 
         # Easy comment
-        # "<leader>/" = [ "gc" ];
+        "<leader>/" = ["gc" "comment" {remap = true;}];
       };
       insert = imap {
         # Easy escape
