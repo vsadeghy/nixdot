@@ -18,6 +18,7 @@
     ./misc.nix
     ./hop.nix
     ./harpoon.nix
+    ./term.nix
   ];
   programs.nixvim.plugins = {
     lazy = {
