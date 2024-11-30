@@ -17,6 +17,10 @@ in {
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
   fonts.fontconfig.enable = true;
   inherit catppuccin;
+  services = {
+    mpris-proxy.enable = true;
+    udiskie.enable = true;
+  };
   home = {
     username = "vss";
     homeDirectory = "/home/vss";
@@ -37,6 +41,7 @@ in {
       # libjpeg
       pcmanfm
       pavucontrol
+      file-roller
       unrar
       obsidian
       lxappearance
@@ -46,7 +51,8 @@ in {
       magnetic-catppuccin-gtk
       catppuccin-qt5ct
       mpv
-      pcmanfm
+      sshfs
+      dconf
       # # You can also create simple shell scripts directly inside your
       # # configuration. For example, this adds a command 'my-hello' to your
       # # environment:

@@ -92,6 +92,8 @@ in {
       jack.enable = true;
     };
     blueman.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
 
     displayManager.defaultSession = "none+i3";
     xserver = {
@@ -191,6 +193,9 @@ in {
     };
     shells = with pkgs; [zsh];
     systemPackages = with pkgs; [
+      obexftp
+      android-file-transfer
+      sshfs
       home-manager
       nix-output-monitor
       nvd
@@ -198,9 +203,13 @@ in {
       vim
       git
       arandr
+      lsof
       nekoray
+      pciutils
+      glxinfo
     ];
   };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
