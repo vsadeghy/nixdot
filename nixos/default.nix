@@ -31,6 +31,9 @@ in {
   };
   nix.settings = {
     substituters = mirrors;
+    # trusted-public-keys = [
+    #   "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+    # ];
     trusted-substituters = mirrors;
     experimental-features = ["nix-command flakes"];
     use-xdg-base-directories = true;
@@ -118,6 +121,8 @@ in {
         layout = "us,ir";
         options = "grp:shifts_toggle";
       };
+
+      videoDrivers = ["nvidia"];
     };
 
     kanata = {
@@ -136,6 +141,22 @@ in {
   };
 
   hardware = {
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau-va-gl
+        glxinfo
+        mesa-demos
+        nvtop
+      ];
+    };
+    nvidia = {
+      # package = config.boot.kernelPackages.nvidiaPackages.production;
+      open = false;
+      modesetting.enable = true;
+      nvidiaSettings = true;
+    };
     pulseaudio = {
       enable = true;
       support32Bit = true;
