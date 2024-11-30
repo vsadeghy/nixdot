@@ -22,7 +22,7 @@
           checkThirdParty = false;
           library = [
             "\${3rd}/lua/library"
-            "unpack(vim.api.vnim_get_runtime_file('', true))"
+            {__raw = "unpack(vim.api.nvim_get_runtime_file('', true))";}
           ];
         };
         diagonstics = {
@@ -41,7 +41,7 @@ in {
     keymapsOnEvents.LspAttach = nmap {
       "gd" = ["<cmd>Telescope lsp_definitions<cr>" "Goto Definition"];
       "gr" = ["<cmd>Telescope lsp_references<cr>" "Goto References"];
-      "gi" = ["<cmd>Telescope lsp_implementations<cr>" "Goto Implementation"];
+      "gI" = ["<cmd>Telescope lsp_implementations<cr>" "Goto Implementation"];
       "gT" = ["<cmd>Telescope lsp_type_definitions<cr>" "Goto Type definitions"];
       "gD" = ["<cmd>lua vim.lsp.buf.declaration()<cr>" "Goto Declaration"];
       "gs" = ["<cmd>Telescope lsp_document_symbols<cr>" "Goto Symbols"];

@@ -61,9 +61,9 @@
 ) 
 
 (deflayer extended
-  esc  f1    f2    f3    f4     f5      f6    f7    f8    f9    f10    f11     f12   brk
-  _     esc   @mwu  bck   fwd    @mau    pgup  home  up    end   del    volu    brk   ins
-  _      lalt   @mwd  lctl  lsft  @mad    pgdn  left  down  rght  bspc   voldwn   prnt
+  esc  f1    f2    f3    f4     f5      f6    f7    f8    f9    f10    f11     f12    brk
+  _     esc   @mwu  bck   fwd    @mau    pgup  home  up    end   del    voldwn  volu   ins
+  _      lalt   @mwd  lctl  lsft  @mad    pgdn  left  down  rght  bspc   @mp      prnt
   _          C-x   C-c   C-v   C-z  mmid   mlft  mrgt  @mal  @mar  XX
                                      ret
 )
@@ -108,6 +108,9 @@
   mad (movemouse-accel-down 1 1000 1 3)
   mal (movemouse-accel-left 1 1000 1 3)
   mar (movemouse-accel-right 1 1000 1 3)
+
+  ;; media pause/play
+  mp (push-msg toggle_media_playback)
 
   a (tap-hold-release-keys $tt $htl (multi a @tap) lmet $left-hand-keys)
   s (tap-hold-release-keys $tt $ht  (multi s @tap) lalt $left-hand-keys)

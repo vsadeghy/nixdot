@@ -25,6 +25,7 @@ in {
             lsp_doc_border = false;
           };
           messages.enabled = false;
+          notify.enabled = false;
         };
       }
     ];

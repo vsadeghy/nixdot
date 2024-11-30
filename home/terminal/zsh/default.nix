@@ -53,7 +53,7 @@
           bindkey "^n" history-search-forward
           compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
           zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-          zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}}'
+          zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
           zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
           zstyle ':completion:*' menu no
           zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
@@ -76,6 +76,7 @@
         {
           name = "fzf-tab";
           src = pkgs.zsh-fzf-tab;
+          file = "share/fzf-tab/fzf-tab.plugin.zsh";
         }
         {
           name = "powerlevel10k-config";
