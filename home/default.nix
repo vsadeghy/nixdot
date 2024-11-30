@@ -69,6 +69,42 @@ in {
       #   org.gradle.console=verbose
       #   org.gradle.daemon.idletimeout=3600000
       # '';
+
+      nekoRayRouting = {
+        target = ".config/nekoray/config/routes/Default";
+        text = builtins.toJSON {
+          block_domain = ''
+            geosite:category-ads-all
+            domain:appcenter.ms
+            domain:firebase.io
+            domain:crashlytics.com
+            domain:google-analytics.com
+          '';
+          custom.rules = [
+            {
+              outboundTag = "direct";
+              protocol = ["bittorrent"];
+              type = "field";
+            }
+          ];
+          def_outbound = "proxy";
+          direct_dns = "localhost";
+          direct_domain = ''
+            regexp:^.+\.ir$
+            geosite:category-ir
+            maryammobaraki.net
+            github.com
+          '';
+          direct_ip = "geoip:ir";
+          dns_final_out = "proxy";
+          dns_routing = true;
+          domain_strategy = "IPIfNonMatch";
+          outbound_domain_strategy = "PreferIPv4";
+          remote_dns = "https://1.1.1.1/dns-query";
+          sniffing_mode = 1;
+          use_dns_object = false;
+        };
+      };
     };
 
     # Home Manager can also manage your environment variables through

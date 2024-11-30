@@ -66,8 +66,13 @@ in {
   time.timeZone = "Asia/Tehran";
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  # networking.proxy = let
+  #   neko = "127.0.0.1:2081";
+  # in {
+  #   httpProxy = neko;
+  #   httpsProxy = neko;
+  #   noProxy = "127.0.0.1,localhost,internal.domain";
+  # };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -193,6 +198,7 @@ in {
       vim
       git
       arandr
+      nekoray
     ];
   };
   # Some programs need SUID wrappers, can be configured further or are

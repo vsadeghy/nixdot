@@ -23,6 +23,7 @@
 in {
   home.packages = with pkgs; [
     blueman
+    nekoray
   ];
   xsession.windowManager.i3 = {
     enable = true;
@@ -45,6 +46,7 @@ in {
           {class = "Variety";}
           {class = "Lxappearance";}
           {class = "Nitrogen";}
+          {class = "nekoray";}
         ];
       };
       startup = [
@@ -52,6 +54,7 @@ in {
         {command = "xss-lock --transfer-sleep-lock -- i3lock-color --nofork";}
         # { command = "nitrogen --restore"; }
         {command = "blueman-applet";}
+        {command = "nekoray";}
         # { command = "clipit"; }
         # { command = "pcmanfm -d"; }
         # { command = "xautolock -time 10 -locker i3lock"; }
