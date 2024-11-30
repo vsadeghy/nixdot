@@ -21,6 +21,9 @@
   mode_gaps_outer = "Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)";
   mode_gaps_inner = "Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)";
 in {
+  home.packages = with pkgs; [
+    blueman
+  ];
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
@@ -48,6 +51,7 @@ in {
         {command = "${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --primary --mode 1920x1080 --pos 1285x0 --rotate normal --output HDMI-1 --mode 1280x1024 --pos 0x0 --rotate normal";}
         {command = "xss-lock --transfer-sleep-lock -- i3lock-color --nofork";}
         # { command = "nitrogen --restore"; }
+        {command = "blueman-applet";}
         # { command = "clipit"; }
         # { command = "pcmanfm -d"; }
         # { command = "xautolock -time 10 -locker i3lock"; }
@@ -125,10 +129,10 @@ in {
         "${mod}+n" = "border normal";
 
         ## multimedia
-        "XF86AudioRaiseVolume" = "exec --no-startup-id wpctl set-volume @DEFAULT_SINK@   10%+  && ${refresh_i3status}";
-        "XF86AudioLowerVolume" = "exec --no-startup-id wpctl set-volume @DEFAULT_SINK@   10%-  && ${refresh_i3status}";
-        "XF86AudioMute" = "exec --no-startup-id pactl set-mute   @DEFAULT_SINK@   toggle && ${refresh_i3status}";
-        "XF86AudioMicMute" = "exec --no-startup-id pactl set-mute @DEFAULT_SOURCE@ toggle && ${refresh_i3status}";
+        "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   +10%  && ${refresh_i3status}";
+        "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   -10%  && ${refresh_i3status}";
+        "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@   toggle && ${refresh_i3status}";
+        "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ${refresh_i3status}";
 
         ## launcher
         "${mod}+b" = "exec ${browser}";

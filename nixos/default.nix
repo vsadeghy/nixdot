@@ -17,6 +17,11 @@ in {
     ./hardware-configuration.nix
   ];
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    pulseaudio = true;
+  };
+
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader.systemd-boot.enable = true;
@@ -75,12 +80,13 @@ in {
   services = {
     # openssh.enable = true;
     pipewire = {
-      enable = true;
+      enable = false;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
     };
+    blueman.enable = true;
 
     displayManager.defaultSession = "none+i3";
     xserver = {
@@ -122,6 +128,23 @@ in {
     };
   };
 
+  hardware = {
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+      package = pkgs.pulseaudioFull;
+      extraConfig = ''
+        load-module module-switch-on-connect
+      '';
+    };
+    bluetooth = {
+      enable = true;
+      settings.General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+  };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.vss = {
     isNormalUser = true;

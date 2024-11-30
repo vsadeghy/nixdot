@@ -36,6 +36,7 @@ in {
       ffmpegthumbnailer
       # libjpeg
       pcmanfm
+      pavucontrol
       unrar
       obsidian
       lxappearance
