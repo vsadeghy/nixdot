@@ -6,7 +6,7 @@
   catppuccin = {
     enable = true;
     flavor = "macchiato";
-    accent = "rosewater";
+    accent = "peach";
   };
 in {
   imports = [
@@ -20,6 +20,10 @@ in {
   services = {
     mpris-proxy.enable = true;
     udiskie.enable = true;
+  };
+  gtk = {
+    enable = true;
+    inherit catppuccin;
   };
   home = {
     username = "vss";
@@ -47,8 +51,16 @@ in {
       lxappearance
       lazygit
       libsForQt5.qt5ct
-      catppuccin-gtk
-      magnetic-catppuccin-gtk
+      # (catppuccin-gtk.override {
+      #   accents = ["rosewater"];
+      #   variant = "macchiato";
+      # })
+      # (magnetic-catppuccin-gtk.override {
+      #   accent = ["all"];
+      #   tweaks = ["macchiato" "mocha"];
+      #   shade = "dark";
+      # })
+      # magnetic-catppuccin-gtk
       catppuccin-qt5ct
       mpv
       sshfs

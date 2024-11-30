@@ -40,7 +40,7 @@
     nixosConfigurations.vix = lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs;};
-      modules = [./nixos nur.nixosModules.nur];
+      modules = [./nixos nur.nixosModules.nur catppuccin.nixosModules.catppuccin];
     };
 
     homeConfigurations.vss = home-manager.lib.homeManagerConfiguration {
