@@ -4,6 +4,7 @@
   ...
 }: let
   mod = "Mod4";
+  alt = "Mod1";
   browser = "zen";
   terminal = "kitty";
   ws1 = "1";
@@ -14,16 +15,32 @@
   ws6 = "6";
   ws7 = "7";
   ws8 = "8";
+  ws9 = "0";
+  ws10 = "10";
   refresh_i3status = "killall -SIGUSR1 i3status";
 
   mode_system = "(l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown";
   mode_gaps = "Gaps: (o) outer, (i) inner";
   mode_gaps_outer = "Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)";
   mode_gaps_inner = "Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)";
+  leftMonitor = "HDMI-0";
+  rightMonitor = "DP-2";
+  primary = rightMonitor;
+  secondary =
+    if (primary == rightMonitor)
+    then leftMonitor
+    else rightMonitor;
+  # getWorkspace = diff: ''"$(( $( i3-msg -t get_workspaces | jq '.[] | select(.focused).num' ) + ${diff}))"'';
+  # prev = "number " + getWorkspace "-1";
+  # next = getWorkspace "1";
+  prev = "prev";
+  next = "next";
 in {
   home.packages = with pkgs; [
+    xorg.xrandr
     blueman
     nekoray
+    jq
   ];
   xsession.windowManager.i3 = {
     enable = true;
@@ -49,8 +66,17 @@ in {
           {class = "nekoray";}
         ];
       };
+      workspaceOutputAssign = let
+        toMonitor = monitor: workspace:
+          map (ws: {
+            output = monitor;
+            workspace = ws;
+          })
+          workspace;
+      in
+        toMonitor leftMonitor [ws1 ws2 ws3 ws4] ++ toMonitor rightMonitor [ws5 ws6 ws7 ws8];
       startup = [
-        {command = "${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --primary --mode 1920x1080 --pos 1285x0 --rotate normal --output HDMI-1 --mode 1280x1024 --pos 0x0 --rotate normal";}
+        {command = "xrandr --output ${secondary} --mode 1280x1024 --pos 0x0 --rotate normal --output ${primary} --primary --mode 1920x1080 --pos 1285x0 --rotate normal --rate 75";}
         {command = "xss-lock --transfer-sleep-lock -- i3lock-color --nofork";}
         # { command = "nitrogen --restore"; }
         {command = "blueman-applet";}
@@ -122,7 +148,7 @@ in {
         "${mod}+q" = "kill";
 
         ## modes
-        "${mod}+0" = ''mode "${mode_system}"'';
+        "${mod}+-" = ''mode "${mode_system}"'';
         "${mod}+g" = ''mode "${mode_gaps}"'';
         "${mod}+r" = ''mode "resize"'';
 
@@ -198,6 +224,10 @@ in {
         "${mod}+6" = "workspace number ${ws6}";
         "${mod}+7" = "workspace number ${ws7}";
         "${mod}+8" = "workspace number ${ws8}";
+        "${mod}+9" = "workspace number ${ws9}";
+        "${mod}+0" = "workspace number ${ws10}";
+        "${mod}+bracketleft" = "workspace ${prev}";
+        "${mod}+bracketright" = "workspace ${next}";
 
         ## move focused container to workspace
         "${mod}+Shift+1" = "move container to workspace number ${ws1}";
@@ -208,6 +238,24 @@ in {
         "${mod}+Shift+6" = "move container to workspace number ${ws6}";
         "${mod}+Shift+7" = "move container to workspace number ${ws7}";
         "${mod}+Shift+8" = "move container to workspace number ${ws8}";
+        "${mod}+Shift+9" = "move container to workspace number ${ws9}";
+        "${mod}+Shift+0" = "move container to workspace number ${ws10}";
+        "${mod}+Shift+bracketleft" = "move container to workspace ${prev}";
+        "${mod}+Shift+bracketright" = "move container to workspace ${next}";
+
+        ## move focused container to workspace and go to it
+        "${mod}+${alt}+1" = "move container to workspace number ${ws1}; workspace number ${ws1}";
+        "${mod}+${alt}+2" = "move container to workspace number ${ws2}; workspace number ${ws2}";
+        "${mod}+${alt}+3" = "move container to workspace number ${ws3}; workspace number ${ws3}";
+        "${mod}+${alt}+4" = "move container to workspace number ${ws4}; workspace number ${ws4}";
+        "${mod}+${alt}+5" = "move container to workspace number ${ws5}; workspace number ${ws5}";
+        "${mod}+${alt}+6" = "move container to workspace number ${ws6}; workspace number ${ws6}";
+        "${mod}+${alt}+7" = "move container to workspace number ${ws7}; workspace number ${ws7}";
+        "${mod}+${alt}+8" = "move container to workspace number ${ws8}; workspace number ${ws8}";
+        "${mod}+${alt}+9" = "move container to workspace number ${ws9}; workspace number ${ws9}";
+        "${mod}+${alt}+0" = "move container to workspace number ${ws10}; workspace number ${ws10}";
+        "${mod}+${alt}+bracketleft" = "move container to workspace ${prev}; workspace ${prev}";
+        "${mod}+${alt}+bracketright" = "move container to workspace ${next}; workspace ${next}";
 
         ## reload the configuration file
         "${mod}+Shift+c" = "reload";
