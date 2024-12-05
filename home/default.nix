@@ -51,6 +51,10 @@ in {
       lxappearance
       lazygit
       libsForQt5.qt5ct
+
+      ytmdesktop
+      youtube-music
+      ferdium
       # (catppuccin-gtk.override {
       #   accents = ["rosewater"];
       #   variant = "macchiato";
