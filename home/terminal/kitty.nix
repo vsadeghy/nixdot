@@ -24,21 +24,21 @@ in {
       # base16 colors
       background ${base00}
       foreground ${base05}
-      selection_background ${base0D}
-      selection_foreground ${base01}
-      url_color ${base0C}
-      cursor  ${base07}
+      selection_background ${base00}
+      selection_foreground ${base06}
+      url_color ${base06}
+      cursor  ${base06}
       cursor_text_color ${base00}
-      active_border_color ${base04}
-      inactive_border_color ${base00}
-      active_tab_background   ${base00}
-      active_tab_foreground   ${base04}
+      active_border_color ${base07}
+      inactive_border_color ${base04}
+      active_tab_background   ${base02}
+      active_tab_foreground   ${base0E}
       active_tab_font_style   bold
-      inactive_tab_foreground ${base07}
-      inactive_tab_background ${base08}
+      inactive_tab_foreground ${base05}
+      inactive_tab_background ${base01}
       inactive_tab_font_style bold
       tab_bar_background ${base00}
-      bell_border_color ${base03}
+      bell_border_color ${base0A}
       tab_bar_style fade
       tab_fade 1
 

@@ -35,12 +35,15 @@
   # next = getWorkspace "1";
   prev = "prev";
   next = "next";
+  palette = builtins.mapAttrs (_: color: "#" + color) config.colorScheme.palette;
+  inherit (import ./lock-color.nix {inherit pkgs palette;}) lock-color;
 in {
   home.packages = with pkgs; [
     xorg.xrandr
     blueman
     nekoray
     jq
+    lock-color
   ];
   xsession.windowManager.i3 = {
     enable = true;
@@ -76,18 +79,17 @@ in {
       in
         toMonitor leftMonitor [ws1 ws2 ws3 ws4] ++ toMonitor rightMonitor [ws5 ws6 ws7 ws8];
       startup = [
-        {command = "xrandr --output ${secondary} --mode 1280x1024 --pos 0x0 --rotate normal --output ${primary} --primary --mode 1920x1080 --pos 1285x0 --rotate normal --rate 75";}
-        {command = "xss-lock --transfer-sleep-lock -- i3lock-color --nofork";}
+        {command = "xrandr --output ${secondary} --mode 1280x1024 --pos 0x0 --rotate normal --rate 75 --output ${primary} --primary --mode 1920x1080 --pos 1285x0 --rotate normal --rate 144";}
+        {command = "xss-lock --transfer-sleep-lock lock-color";}
         # { command = "nitrogen --restore"; }
         {command = "blueman-applet";}
         {command = "nekoray";}
         # { command = "clipit"; }
         # { command = "pcmanfm -d"; }
-        # { command = "xautolock -time 10 -locker i3lock"; }
       ];
       modes = {
         ${mode_system} = {
-          l = "exec --no-startup-id i3lock             , mode default";
+          l = "exec --no-startup-id lock-color         , mode default";
           s = "exec --no-startup-id systemctl suspend  , mode default";
           u = "exec --no-startup-id i3exit switch_user , mode default";
           e = "exec --no-startup-id i3-msg exit        , mode default";
@@ -148,7 +150,7 @@ in {
         "${mod}+q" = "kill";
 
         ## modes
-        "${mod}+-" = ''mode "${mode_system}"'';
+        "${mod}+x" = ''mode "${mode_system}"'';
         "${mod}+g" = ''mode "${mode_gaps}"'';
         "${mod}+r" = ''mode "resize"'';
 
@@ -288,75 +290,75 @@ in {
           command = "i3bar";
           statusCommand = "i3status-rs";
           # trayOutput = tray;
-          colors = with config.colorScheme.palette; {
-            background = "#${base00}";
-            separator = "#${base01}";
-            statusline = "#${base04}";
+          colors = with palette; {
+            background = base00;
+            separator = base01;
+            statusline = base04;
             focusedWorkspace = {
-              border = "#${base05}";
-              background = "#${base0D}";
-              text = "#${base00}";
+              border = base05;
+              background = base0D;
+              text = base00;
             };
             activeWorkspace = {
-              border = "#${base05}";
-              background = "#${base03}";
-              text = "#${base00}";
+              border = base05;
+              background = base03;
+              text = base00;
             };
             inactiveWorkspace = {
-              border = "#${base03}";
-              background = "#${base01}";
-              text = "#${base05}";
+              border = base03;
+              background = base01;
+              text = base05;
             };
             urgentWorkspace = {
-              border = "#${base08}";
-              background = "#${base08}";
-              text = "#${base00}";
+              border = base08;
+              background = base08;
+              text = base00;
             };
             bindingMode = {
-              border = "#${base00}";
-              background = "#${base0A}";
-              text = "#${base00}";
+              border = base00;
+              background = base0A;
+              text = base00;
             };
           };
         }
       ];
       #);
-      colors = with config.colorScheme.palette; {
-        background = "#${base07}";
+      colors = with palette; {
+        background = base07;
         focused = {
-          border = "#${base05}";
-          background = "#${base0D}";
-          text = "#${base00}";
-          indicator = "#${base0D}";
-          childBorder = "#${base0C}";
+          border = base05;
+          background = base0D;
+          text = base00;
+          indicator = base0D;
+          childBorder = base0C;
         };
         focusedInactive = {
-          border = "#${base01}";
-          background = "#${base01}";
-          text = "#${base05}";
-          indicator = "#${base03}";
-          childBorder = "#${base01}";
+          border = base01;
+          background = base01;
+          text = base05;
+          indicator = base03;
+          childBorder = base01;
         };
         unfocused = {
-          border = "#${base01}";
-          background = "#${base00}";
-          text = "#${base05}";
-          indicator = "#${base01}";
-          childBorder = "#${base01}";
+          border = base01;
+          background = base00;
+          text = base05;
+          indicator = base01;
+          childBorder = base01;
         };
         urgent = {
-          border = "#${base08}";
-          background = "#${base08}";
-          text = "#${base00}";
-          indicator = "#${base08}";
-          childBorder = "#${base08}";
+          border = base08;
+          background = base08;
+          text = base00;
+          indicator = base08;
+          childBorder = base08;
         };
         placeholder = {
-          border = "#${base00}";
-          background = "#${base00}";
-          text = "#${base05}";
-          indicator = "#${base00}";
-          childBorder = "#${base00}";
+          border = base00;
+          background = base00;
+          text = base05;
+          indicator = base00;
+          childBorder = base00;
         };
       };
     };
