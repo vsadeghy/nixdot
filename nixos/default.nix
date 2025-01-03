@@ -26,8 +26,14 @@ in {
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
+    initrd = {
+      kernelModules = ["nvidia"];
+      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
+    };
     supportedFilesystems = ["ntfs"];
+    extraModulePackages = with config.boot.kernelPackages; [ddcci-driver];
+    kernelModules = ["i2c-dev" "ddci-backlight"];
+    kernelParams = ["module_blacklist=amdgpu"];
   };
   nix.settings = {
     substituters = mirrors;
@@ -39,13 +45,32 @@ in {
     use-xdg-base-directories = true;
     nix-path = config.nix.nixPath;
   };
-  programs.nh = {
+  xdg.portal = {
     enable = true;
-    clean = {
-      enable = true;
-      extraArgs = "--keep 10";
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    configPackages = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal];
+    config = {
+      common.default = ["gtk"];
+      "org.freedesktop.portal.Settings" = {};
     };
-    flake = "/home/vss/.nixdot";
+  };
+  programs = {
+    light = {
+      enable = true;
+      brightnessKeys = {
+        enable = true;
+        step = 10;
+      };
+    };
+    nh = {
+      enable = true;
+      clean = {
+        enable = true;
+        extraArgs = "--keep 10";
+      };
+      flake = "/home/vss/.nixdot";
+    };
+    appimage.enable = true;
   };
   networking = {
     # firewall.allowedTCPPorts = [ ... ];
@@ -119,7 +144,7 @@ in {
 
       xkb = {
         layout = "us,ir";
-        options = "grp:shifts_toggle";
+        options = "grp:shifts_toggle;caps:escape";
       };
 
       videoDrivers = ["nvidia"];
@@ -141,18 +166,25 @@ in {
   };
 
   hardware = {
+    i2c.enable = true;
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
         vaapiVdpau
+        libvdpau
         libvdpau-va-gl
+        nvidia-vaapi-driver
+        vdpauinfo
+        libva
+        libva-utils
+        libGL
         glxinfo
         mesa-demos
-        nvtop
+        nvtopPackages.full
       ];
     };
     nvidia = {
-      # package = config.boot.kernelPackages.nvidiaPackages.production;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
       open = false;
       modesetting.enable = true;
       nvidiaSettings = true;
@@ -167,6 +199,7 @@ in {
     };
     bluetooth = {
       enable = true;
+      powerOnBoot = true;
       settings.General = {
         Enable = "Source,Sink,Media,Socket";
         Experimental = true;
@@ -180,7 +213,6 @@ in {
     ignoreShellProgramCheck = true;
     extraGroups = ["wheel" "networkmanager" "input" "video" "audio"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      kitty
       alacritty
       brave
       nitrogen
@@ -208,6 +240,7 @@ in {
       XDG_DATA_HOME = "$HOME/.local/share";
       XDG_STATE_HOME = "$HOME/.local/state";
       XDG_BIN_HOME = "$HOME/.local/bin";
+      XDG_RUNTIME_DIR = "/run/user/$UID";
       PATH = [
         "${XDG_BIN_HOME}"
       ];
@@ -228,6 +261,7 @@ in {
       nekoray
       pciutils
       glxinfo
+      nixos-option
     ];
   };
 

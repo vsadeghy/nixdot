@@ -76,6 +76,11 @@ in {
       #   echo "Hello, ${config.home.username}!"
       # '')
       inputs.zen-browser.packages."${pkgs.system}".specific
+
+      xorg.xkill
+      xorg.xbacklight
+      brightnessctl
+      ddcutil
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
