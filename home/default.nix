@@ -20,17 +20,44 @@ in {
   services = {
     mpris-proxy.enable = true;
     udiskie.enable = true;
+    playerctld.enable = true;
+    flameshot = {
+      enable = true;
+      settings = {
+        General = {
+          showHelp = false;
+          startupLaunch = true;
+        };
+      };
+    };
   };
   gtk = {
     enable = true;
-    inherit catppuccin;
+    # theme.packages = pkgs.catppuccin-gtk.override {
+    #   accents = ["mauve"];
+    #   variant = "macchiato";
+    #   size = "standard";
+    # };
+    # theme.name = "Catppuccin-Dark";
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    font = {
+      name = "JetBrainsMono Nerd Font";
+    };
   };
   home = {
     username = "vss";
     homeDirectory = "/home/vss";
     stateVersion = "24.05";
     packages = with pkgs; [
-      (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
+      xsel
+      nerd-fonts.fira-code
+      nerd-fonts.droid-sans-mono
+      nerd-fonts.jetbrains-mono
       htop
       firefox
       zenith
@@ -55,6 +82,7 @@ in {
       ytmdesktop
       youtube-music
       ferdium
+      jdk23
       # (catppuccin-gtk.override {
       #   accents = ["rosewater"];
       #   variant = "macchiato";
@@ -69,6 +97,7 @@ in {
       mpv
       sshfs
       dconf
+      gpick
       # # You can also create simple shell scripts directly inside your
       # # configuration. For example, this adds a command 'my-hello' to your
       # # environment:
@@ -76,11 +105,18 @@ in {
       #   echo "Hello, ${config.home.username}!"
       # '')
       inputs.zen-browser.packages."${pkgs.system}".specific
+      vesktop
+      spotube
+
+      libqalculate
+      galculator
 
       xorg.xkill
       xorg.xbacklight
       brightnessctl
       ddcutil
+
+      insomnia
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

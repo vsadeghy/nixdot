@@ -60,7 +60,7 @@ in {
       color12 ${base04}
       color13 ${base06}
       color14 ${base0F}
-      color14 ${base07}
+      color15 ${base07}
     '';
   };
 }
