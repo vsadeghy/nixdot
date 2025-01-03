@@ -4,7 +4,6 @@
     ./nixvim
     ./tmux
     ./kitty.nix
-    ./wezterm.nix
     ./ghostty.nix
   ];
   home.packages = with pkgs; [nitch neofetch];
