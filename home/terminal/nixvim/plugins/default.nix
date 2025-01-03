@@ -19,6 +19,7 @@
     ./hop.nix
     ./harpoon.nix
     ./term.nix
+    ./tmux-navigator.nix
   ];
   programs.nixvim.plugins = {
     lazy = {

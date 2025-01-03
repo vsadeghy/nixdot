@@ -2,7 +2,10 @@
   imports = [
     ./zsh
     ./nixvim
+    ./tmux
     ./kitty.nix
+    ./wezterm.nix
+    ./ghostty.nix
   ];
   home.packages = with pkgs; [nitch neofetch];
   programs = {
@@ -14,6 +17,7 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      tmux.enableShellIntegration = true;
     };
     eza = {
       enable = true;
