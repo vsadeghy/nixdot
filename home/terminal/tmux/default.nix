@@ -1,8 +1,10 @@
-{pkgs, ...}: {
-  home.packages = [pkgs.tmux-sessionizer];
+{pkgs, ...}: let
+  inherit (import ./tmux-sessionizer.nix {inherit pkgs;}) tmux-sessionizer;
+in {
+  home.packages = [tmux-sessionizer];
   programs.tmux = {
     enable = true;
-    prefix = "C-space";
+    prefix = "C-a";
     mouse = true;
     plugins = with pkgs.tmuxPlugins; [
       sensible
@@ -22,10 +24,11 @@
       bind h split-window -h -c "#{pane_current_path}"
       bind v split-window -v -c "#{pane_current_path}"
       bind f resize-pane -Z
-      bind-key -T root C-h select-pane -ZL
-      bind-key -T root C-j select-pane -ZD
-      bind-key -T root C-k select-pane -ZU
-      bind-key -T root C-l select-pane -ZR
+
+      bind-key f run-shell "tmux neww tmux-sessionizer"
+
+      source-file ~/.tmux.conf
+      bind-key r source-file ~/.tmux.conf
     '';
   };
 }
