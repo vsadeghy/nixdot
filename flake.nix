@@ -19,6 +19,8 @@
       url = "github:ch4og/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty.url = "github:ghostty-org/ghostty";
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = {
@@ -28,6 +30,7 @@
     nixvim,
     catppuccin,
     nur,
+    stylix,
     ...
   } @ inputs: let
     lib = nixpkgs.lib;
@@ -40,7 +43,12 @@
     nixosConfigurations.vix = lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs;};
-      modules = [./nixos nur.nixosModules.nur catppuccin.nixosModules.catppuccin];
+      modules = [
+        ./nixos
+        nur.nixosModules.nur
+        catppuccin.nixosModules.catppuccin
+        stylix.nixosModules.stylix
+      ];
     };
 
     homeConfigurations.vss = home-manager.lib.homeManagerConfiguration {

@@ -98,6 +98,7 @@ in {
       sshfs
       dconf
       gpick
+      xdotool
       # # You can also create simple shell scripts directly inside your
       # # configuration. For example, this adds a command 'my-hello' to your
       # # environment:
@@ -107,6 +108,7 @@ in {
       inputs.zen-browser.packages."${pkgs.system}".specific
       vesktop
       spotube
+      qbittorrent-enhanced
 
       libqalculate
       galculator

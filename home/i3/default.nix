@@ -61,12 +61,14 @@ in {
         outer = -2;
       };
       floating = {
-        criteria = [
-          {class = "Pavucontrol";}
-          {class = "Variety";}
-          {class = "Lxappearance";}
-          {class = "Nitrogen";}
-          {class = "nekoray";}
+        criteria = map (c: {class = c;}) [
+          "Pavucontrol"
+          "Variety"
+          "Lxappearance"
+          "Nitrogen"
+          "nekoray"
+          "blueman-manager-wrapped"
+          "Galculator"
         ];
       };
       workspaceOutputAssign = let
@@ -164,21 +166,16 @@ in {
         "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   -10%  && ${refresh_i3status}";
         "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@   toggle && ${refresh_i3status}";
         "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ${refresh_i3status}";
+        "XF86MonBrightnessUp" = "exec --no-startup-id xbacklight -inc 20";
+        "XF86MonBrightnessDown" = "exec --no-startup-id xbacklight -dec 20";
+        "XF86AudioPlay" = "exec playerctl play-pause";
+        "XF86AudioStop" = "exec playerctl stop";
+        "XF86AudioNext" = "exec playerctl next";
+        "XF86AudioPrev" = "exec playerctl previous";
+        "Print" = "exec --no-startup-id flameshot gui";
 
         ## launcher
         "${mod}+b" = "exec ${browser}";
-
-        ## change focus
-        "${mod}+h" = "focus left";
-        "${mod}+j" = "focus down";
-        "${mod}+k" = "focus up";
-        "${mod}+l" = "focus right";
-
-        ## move focused window
-        "${mod}+Shift+h" = "move left";
-        "${mod}+Shift+j" = "move down";
-        "${mod}+Shift+k" = "move up";
-        "${mod}+Shift+l" = "move right";
 
         ## split orientation
         #"${mod}+h" = "split h;exec notify-send 'tile horizontally'";
@@ -192,11 +189,6 @@ in {
         "${mod}+s" = "layout stacking";
         "${mod}+w" = "layout tabbed";
         "${mod}+shift+semicolon" = "layout toggle split";
-
-        ## workspace back and forth (with/without active container)
-        "${mod}+o" = "workspace back_and_forth";
-        "${mod}+Ctrl+o" = "move container to workspace back_and_forth;";
-        "${mod}+Shift+o" = "move container to workspace back_and_forth; workspace back_and_forth";
 
         ## toggle tiling / floating
         "${mod}+Shift+space" = "floating toggle";
@@ -218,6 +210,15 @@ in {
         "${mod}+minus" = "scratchpad show";
 
         ## switch to workspace
+        "${mod}+h" = "focus left";
+        "${mod}+j" = "focus down";
+        "${mod}+k" = "focus up";
+        "${mod}+l" = "focus right";
+        "${mod}+Left" = "focus left";
+        "${mod}+Down" = "focus down";
+        "${mod}+Up" = "focus up";
+        "${mod}+Right" = "focus right";
+        "${mod}+o" = "workspace back_and_forth";
         "${mod}+1" = "workspace number ${ws1}";
         "${mod}+2" = "workspace number ${ws2}";
         "${mod}+3" = "workspace number ${ws3}";
@@ -232,6 +233,15 @@ in {
         "${mod}+bracketright" = "workspace ${next}";
 
         ## move focused container to workspace
+        "${mod}+Shift+h" = "move left";
+        "${mod}+Shift+j" = "move down";
+        "${mod}+Shift+k" = "move up";
+        "${mod}+Shift+l" = "move right";
+        "${mod}+Shift+Left" = "move left";
+        "${mod}+Shift+Down" = "move down";
+        "${mod}+Shift+Up" = "move up";
+        "${mod}+Shift+Right" = "move right";
+        "${mod}+Shift+o" = "move container to workspace back_and_forth";
         "${mod}+Shift+1" = "move container to workspace number ${ws1}";
         "${mod}+Shift+2" = "move container to workspace number ${ws2}";
         "${mod}+Shift+3" = "move container to workspace number ${ws3}";
@@ -245,7 +255,16 @@ in {
         "${mod}+Shift+bracketleft" = "move container to workspace ${prev}";
         "${mod}+Shift+bracketright" = "move container to workspace ${next}";
 
-        ## move focused container to workspace and go to it
+        ## move focused container to workspace and switch to it
+        "${mod}+${alt}+h" = "move left; focus left";
+        "${mod}+${alt}+j" = "move down; focus down";
+        "${mod}+${alt}+k" = "move up; focus up";
+        "${mod}+${alt}+l" = "move right; focus right";
+        "${mod}+${alt}+Left" = "move left; focus left";
+        "${mod}+${alt}+Down" = "move down; focus down";
+        "${mod}+${alt}+Up" = "move up; focus up";
+        "${mod}+${alt}+Right" = "move right; focus right";
+        "${mod}+${alt}+o" = "move container to workspace back_and_forth; workspace back_and_forth";
         "${mod}+${alt}+1" = "move container to workspace number ${ws1}; workspace number ${ws1}";
         "${mod}+${alt}+2" = "move container to workspace number ${ws2}; workspace number ${ws2}";
         "${mod}+${alt}+3" = "move container to workspace number ${ws3}; workspace number ${ws3}";
