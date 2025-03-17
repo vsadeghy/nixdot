@@ -1,0 +1,248 @@
+(defcfg
+  linux-continue-if-no-devs-found yes
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+  chords-v2-min-idle-experimental 50
+)
+;; keys to be used in the layers
+(defsrc
+   q w e r t y u i o  p
+   a s d f g h j k l ︔
+   z x c v b n m ⸴ .  ⁄
+   spc
+)
+
+(defvar
+  tap-timeout 200
+  hold-timeout 150
+  hold-timeout-long 200
+  tt $tap-timeout
+  ht $hold-timeout
+  htl $hold-timeout-long
+
+  ;; skip hold in same hand
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o  p
+    h j k l ︔
+    n m ⸴ .  ⁄
+  )
+  lh $left-hand-keys
+  rh $right-hand-keys
+)
+
+;; smoother tap-hold
+(deffakekeys to-base (layer-switch base))
+
+(deftemplate taphold (tap hold holdtime keys tobase)
+  (tap-hold-release-keys
+    $tt
+    $holdtime
+    (multi $tap $tobase)
+    $hold
+    $keys
+  )
+)
+
+;; home? row mods
+(defalias
+  gobase (multi
+    (layer-switch nomods)
+    (on-idle-fakekey to-base tap 20)
+  )
+   a❖ (t! taphold  a ‹❖ $htl $lh @gobase)
+   x⎇ (t! taphold  x ‹⎇ $ht  $lh @gobase)
+   c⌃ (t! taphold  c ‹⌃ $ht  $lh @gobase)
+   f⇧ (t! taphold  f ‹⇧ $ht  $lh @gobase)
+   j⇧ (t! taphold  j ⇧› $ht  $rh @gobase)
+   ⸴⌃ (t! taphold  ⸴ ⌃› $ht  $rh @gobase)
+   .⎇ (t! taphold  . ⎇› $ht  $rh @gobase)
+  ︔❖ (t! taphold ︔ ❖› $htl $rh @gobase)
+
+  base (layer-switch base)
+  bsym (layer-switch basesym)
+  bnum (layer-switch basenum)
+  bmouse (layer-switch basemouse)
+  bsymnum (tap-hold $tt $ht @bsym @bnum)
+)
+
+;;base layer is the first layer defined
+(deflayer base
+  q     w     e     r     t           y     u     i     o     p
+  @a❖   s     @dnav @f⇧   g           h     @j⇧   k     l     @︔❖
+        @x⎇   @c⌃   v     b     z     n     m     @⸴⌃   @.⎇   @bsymnum
+                               @spc
+)
+(deflayer basesym (t! sym @base @bnum @bmouse))
+(deflayer basenum (t! num @base @bsym))
+(deflayer basemouse (t! mouse @base))
+
+(deflayer nomods
+  q     w     e     r     t           y     u     i     o     p
+  a     s     d     f     g           h     j     k     l    ︔
+        x     c     v     b     z     n     m     ⸴     .     ⁄
+                                ␣
+)
+
+(defalias
+  misc (layer-switch misc)
+  dnav (tap-hold-release $tt $ht  (multi d @gobase) (layer-while-held nav))
+  raise (tap-hold-press  $tt $ht (multi ␣ @gobase) (layer-while-held raise))
+  spc (fork @raise ␣ (‹⌃ ⌃›))
+)
+
+(deflayer raise
+  @tab  •     •    •    •       •    •    •    •    ⌦
+  ⎋     •    ‹⌃    ⏎    •       •    •    •    •    ⌫
+        @cw   •    •    •   ⇪   •    •    ⁄   @?    _
+                            _
+)
+(defalias
+  tab (tap-hold $tt $ht ⭾  ‹⇧⭾ )
+  cw (caps-word-toggle 2000)
+)
+(deflayer nav
+  ‹❖q   ‹⎇  •    •     •          •    •     •     ‹❖o   ⌫
+  ‹❖    ‹⌃  •    ‹⇧    •          •    ◀     ▼     ▲     ▶
+        •   •    ‹❖⏎   •    •     •    ↖     ⇟     ⇞     ↖
+                          @spc
+)
+
+(deftemplate sym (base num mouse)
+  $base @⟨    @⟩    @_    @|          @˜    @⟧    @⟦    @∗     @?
+  @!     ‐    @＋    ₌    @＆         @⌗    @〕  @〔    @’     $mouse
+         ˋ    @”     ⁄     \     @∧   @＠   @❵    @❴    @$     $num
+                               @spc
+)
+
+(defalias
+  !  S-1
+  ＠ S-2
+  ⌗  S-3
+  $  S-4
+  %  S-5
+  ∧  S-6
+  ＆ S-7
+  ∗  S-8
+ 〔  S-9
+  〕 S-0
+  ˜  S-ˋ
+  -  min
+  _  S-min
+  =  eql
+  ＋ S-eql
+  |  S-\
+  ⟦  [
+  ⟧  ]
+  ❴  S-[
+  ❵  S-]
+  :  S-;
+  ⟨  S-,
+  ⟩  S-.
+  ?  S-⁄
+  ”  S-'
+  ’  '
+)
+
+(deftemplate num (base sym)
+  $base f10   f11   f12   ‐           ⁄     @4    @5    @6    bspc
+  ‹❖    ‹⎇    ‹⌃    ‹⇧   @＋          •     @1    @2    @3    ₌
+        @misc  •    0     .     •     ⸴     @7    @8    @9    $sym
+                               @spc
+)
+
+(defalias
+  1 (tap-hold $tt $ht 1 f1)
+  2 (tap-hold $tt $ht 2 f2)
+  3 (tap-hold $tt $ht 3 f3)
+  4 (tap-hold $tt $ht 4 f4)
+  5 (tap-hold $tt $ht 5 f5)
+  6 (tap-hold $tt $ht 6 f6)
+  7 (tap-hold $tt $ht 7 f7)
+  8 (tap-hold $tt $ht 8 f8)
+  9 (tap-hold $tt $ht 9 f9)
+)
+
+(deftemplate mouse (base)
+  $base @mwl  @mu   @mwr  •         •     @prv  @nxt  mlft  •
+  •     @ml   @md   @mr   •         •     ⇧›    ⌃›    ⎇›    ❖›
+        mrgt  @mwu  @mwd  •    •    mlft  @ma2  @ma1  @ma3  @ma0
+                               _
+)
+(defalias
+  nxt C-tab
+  prv C-S-tab
+  ;; mousewheel: interval, distance
+  mwu (🖱☸↑ 50 120)
+  mwd (🖱☸↓ 50 120)
+  mwl (🖱☸← 50 120)
+  mwr (🖱☸→ 50 120)
+
+  ;; movemouse-speed: percent
+  ma0 (🖱speed 25)
+  ma1 (🖱speed 50)
+  ma2 (🖱speed 150)
+  ma3 (🖱speed 250)
+
+  ;; movemouse: interval, distance
+  mu (🖱↑ 8 4)
+  md (🖱↓ 8 4)
+  ml (🖱← 8 4)
+  mr (🖱→ 8 4)
+)
+
+(deflayer misc
+  @base ◀◀    ▶⏸   ▶▶    prnt    @qwr @grp •    •   •
+  •     🔈⊖   🔈⓪  🔈⊕   •       •    •    •    •   •
+        🔅    •    🔆    •   •   •    •    •    •   •
+                             _
+)
+
+(defalias
+  qwr   (layer-switch qwerty)
+  grp   (layer-switch graphite-nomod)
+  oneshot-sym (one-shot 1000 (layer-toggle basesym))
+  ⁄ (tap-hold $tt 1000 @oneshot-sym (layer-switch base))
+)
+(deflayer qwerty
+  q     w     e     r     t           y     u     i     o     p
+  a     s     d     f     g           h     j     k     l    ︔
+  z     x     c     v     b           n     m     ⸴     .    @⁄
+                                ␣
+)
+
+(deffakekeys to-graphite (layer-switch graphite))
+(defalias
+  gograph (multi
+    (layer-switch graphite-nomod)
+    (on-idle-fakekey to-graphite tap 20)
+  )
+   n❖g (t! taphold n ‹❖ $htl $lh @gograph)
+   l⎇g (t! taphold l ‹⎇ $ht  $lh @gograph)
+   d⌃g (t! taphold d ‹⌃ $ht  $lh @gograph)
+   s⇧g (t! taphold s ‹⇧ $ht  $lh @gograph)
+   h⇧g (t! taphold h ⇧› $ht  $rh @gograph)
+   o⌃g (t! taphold o ⌃› $ht  $rh @gograph)
+   u⎇g (t! taphold u ⎇› $ht  $rh @gograph)
+   i❖g (t! taphold i ❖› $htl $rh @gograph)
+  tnav (tap-hold-release $tt $ht  (multi t @gograph) (layer-while-held nav))
+   ‘ (fork @’  @_ (‹⇧ ⇧›)) ;; S-' -> _
+   ⸴ (fork  ⸴  @” (‹⇧ ⇧›)) ;; S-, -> "
+   . (fork  .  ︔ (‹⇧ ⇧›)) ;; S-. -> ;
+)
+(deflayer graphite
+   b    @l⎇g  @d⌃g    w     z         @‘     f    @o⌃g  @u⎇g   j
+  @n❖g   r    @tnav @s⇧g    g          y    @h⇧g   a     e    @i❖g
+         x     m      c     v    q     k     p    @.    @⸴    @⁄
+                                ␣
+)
+(deflayer graphite-nomod
+   b     l     d     w     z         @‘     f     o     u     j ;; ; =
+   n     r     t     s     g          y     h     a     e     i ;; -
+         x     m     c     v    q     k     p    @.    @⸴    @⁄
+                                ␣
+)

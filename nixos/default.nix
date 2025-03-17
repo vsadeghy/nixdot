@@ -7,9 +7,9 @@
   ...
 }: let
   mirrors = [
-    "https://mirror.sjtu.edu.cn/nix-channels/store"
-    "https://mirrors.ustc.edu.cn/nix-channels/store"
     "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+    "https://mirrors.ustc.edu.cn/nix-channels/store"
+    "https://mirror.sjtu.edu.cn/nix-channels/store"
   ];
 in {
   imports = [
@@ -27,7 +27,7 @@ in {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     initrd = {
-      kernelModules = ["nvidia"];
+      # kernelModules = ["nvidia"];
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
     };
     supportedFilesystems = ["ntfs"];
@@ -119,6 +119,14 @@ in {
       pulse.enable = true;
       jack.enable = true;
     };
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+      package = pkgs.pulseaudioFull;
+      extraConfig = ''
+        load-module module-switch-on-connect
+      '';
+    };
     blueman.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
@@ -147,7 +155,7 @@ in {
         options = "grp:shifts_toggle;caps:escape";
       };
 
-      videoDrivers = ["nvidia"];
+      # videoDrivers = ["nvidia"];
     };
 
     kanata = {
@@ -180,22 +188,14 @@ in {
         libGL
         glxinfo
         mesa-demos
-        nvtopPackages.full
+      #   nvtopPackages.full
       ];
     };
     nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.production;
+      # package = config.boot.kernelPackages.nvidiaPackages.production;
       open = false;
       modesetting.enable = true;
       nvidiaSettings = true;
-    };
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-      package = pkgs.pulseaudioFull;
-      extraConfig = ''
-        load-module module-switch-on-connect
-      '';
     };
     bluetooth = {
       enable = true;
@@ -217,7 +217,6 @@ in {
       brave
       nitrogen
       variety
-      neovim
       gh
       stow
       tlrc

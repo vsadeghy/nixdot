@@ -16,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
-      url = "github:ch4og/zen-browser-flake";
+      url = "github:omarcresp/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ghostty.url = "github:ghostty-org/ghostty";
@@ -45,7 +45,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./nixos
-        nur.nixosModules.nur
+        nur.modules.nixos.default
         catppuccin.nixosModules.catppuccin
         stylix.nixosModules.stylix
       ];
@@ -58,7 +58,6 @@
         ./home
         nixvim.homeManagerModules.nixvim
         catppuccin.homeManagerModules.catppuccin
-        nur.nixosModules.nur
       ];
     };
   };
