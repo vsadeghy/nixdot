@@ -9,7 +9,8 @@
     ./navbuddy.nix
     ./lsp.nix
     ./barbeque.nix
-    ./none-ls.nix
+    # ./none-ls.nix
+    ./conform.nix
     ./completions.nix
     ./gitsigns.nix
     ./indent-blankline.nix

@@ -36,7 +36,7 @@
   };
   ensure_installed = ["stylua"] ++ lib.attrsets.mapAttrsToList (name: _: name) servers;
 in {
-  home.packages = with pkgs; [typescript cargo nodePackages_latest.nodejs nodePackages_latest.pnpm];
+  home.packages = with pkgs; [typescript cargo nodePackages_latest.nodejs nodePackages_latest.pnpm lua-language-server nil];
   programs.nixvim = {
     keymapsOnEvents.LspAttach = nmap {
       "gd" = ["<cmd>Telescope lsp_definitions<cr>" "Goto Definition"];

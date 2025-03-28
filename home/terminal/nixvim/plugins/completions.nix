@@ -28,7 +28,7 @@
               };
             }
           ];
-          config.__raw = ''
+          config.__raw = /* lua */ ''
             function()
               -- See `:help cmp`
               local cmp = require 'cmp'
