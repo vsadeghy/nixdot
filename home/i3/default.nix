@@ -6,7 +6,7 @@
   mod = "Mod4";
   alt = "Mod1";
   browser = "zen";
-  terminal = "kitty";
+  terminal = "ghostty";
   ws1 = "1";
   ws2 = "2";
   ws3 = "3";

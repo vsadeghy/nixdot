@@ -4,7 +4,7 @@
   ...
 }: let
   catppuccin = {
-    enable = true;
+    enable = false;
     flavor = "macchiato";
     accent = "peach";
   };
@@ -16,7 +16,7 @@ in {
   ];
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
   fonts.fontconfig.enable = true;
-  inherit catppuccin;
+  # inherit catppuccin;
   services = {
     mpris-proxy.enable = true;
     udiskie.enable = true;
@@ -54,6 +54,14 @@ in {
     homeDirectory = "/home/vss";
     stateVersion = "24.05";
     packages = with pkgs; [
+      neovim
+      nodePackages_latest.pnpm
+      nodePackages_latest.nodejs
+      nodePackages_latest.typescript
+      nixd
+
+      psmisc
+
       xsel
       nerd-fonts.fira-code
       nerd-fonts.droid-sans-mono
@@ -75,6 +83,7 @@ in {
       file-roller
       unrar
       obsidian
+      foliate
       lxappearance
       lazygit
       libsForQt5.qt5ct
@@ -110,8 +119,12 @@ in {
       spotube
       qbittorrent-enhanced
 
+      uget
+      uget-integrator
+
       libqalculate
       galculator
+      libreoffice-still
 
       xorg.xkill
       xorg.xbacklight
@@ -197,10 +210,12 @@ in {
 
       EDITOR = "nvim";
       VOLTA_HOME = "${XDG_CONFIG_HOME}/volta";
-      # PATH = [
-      #   "${VOLTA_HOME}"
-      #   "${XDG_BIN_HOME}"
-      # ];
+      PATH = builtins.concatStringsSep ":" [
+        "${VOLTA_HOME}"
+        "${XDG_BIN_HOME}"
+        "$HOME/.bin"
+        "$PATH"
+      ];
     };
   };
 

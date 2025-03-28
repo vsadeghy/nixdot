@@ -13,6 +13,10 @@ in {
       text = with palette; ''
         font-family = "JetBrains Mono Nerd Font"
         font-size = 14
+        window-decoration = server
+        shell-integration-features = true
+        confirm-close-surface = false
+        # initial-command = "tmux a || tmux || $SHELL"
         background = ${base00}
         foreground = ${base05}
 
@@ -36,6 +40,16 @@ in {
         palette = 13=${base06}
         palette = 14=${base0F}
         palette = 15=${base07}
+
+        keybind = alt+1=unbind
+        keybind = alt+2=unbind
+        keybind = alt+3=unbind
+        keybind = alt+4=unbind
+        keybind = alt+5=unbind
+        keybind = alt+6=unbind
+        keybind = alt+7=unbind
+        keybind = alt+8=unbind
+        keybind = alt+0=unbind
       '';
     };
   };

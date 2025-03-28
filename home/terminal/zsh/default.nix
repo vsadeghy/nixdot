@@ -19,6 +19,7 @@
         sb = "nh os switch";
         st = "nh os test";
         sbb = "sudo nixos-rebuild switch --flake ~/.nixdot";
+        nb = "cd ~/.config/nvim; nix build; cd - &>/dev/null";
       };
 
       envExtra =

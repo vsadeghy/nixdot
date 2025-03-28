@@ -6,7 +6,7 @@
   ];
   home.shellAliases.v = "nvim";
   programs.nixvim = {
-    enable = true;
+    enable = false;
     defaultEditor = true;
     # performance = {
     #   combinePlugins = {

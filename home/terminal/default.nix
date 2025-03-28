@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./zsh
-    ./nixvim
+    # ./nixvim
     ./tmux
     ./kitty.nix
     ./ghostty.nix
