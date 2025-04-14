@@ -61,11 +61,12 @@ in {
         bind -n M-8 select-window -t 8
         bind -n M-9 select-window -t 9
         bind -n M-0 select-window -t 10
-        bind -n M-n select-window -n
-        bind -n M-p select-window -p
-        bind -n M-i switch-client -p
-        bind -n M-o switch-client -n
-        bind -n M-c new-window
+
+        bind -n M-Home  select-window -p
+        bind -n M-End   select-window -n
+        bind -n M-PPage switch-client -n
+        bind -n M-NPage switch-client -p
+
 
         bind-key -T copy-mode-vi v send -X begin-selection
         bind-key -T copy-mode-vi C-v send -X rectangle-toggle
@@ -79,10 +80,10 @@ in {
 
         is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
             | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-        bind-key -n M-h if-shell "$is_vim" "send-keys M-h" "select-pane -L"
-        bind-key -n M-j if-shell "$is_vim" "send-keys M-j" "select-pane -D"
-        bind-key -n M-k if-shell "$is_vim" "send-keys M-k" "select-pane -U"
-        bind-key -n M-l if-shell "$is_vim" "send-keys M-l" "select-pane -R"
+        bind-key -n M-Up    if-shell "$is_vim" "send-keys M-Up"    "select-pane -U"
+        bind-key -n M-Down  if-shell "$is_vim" "send-keys M-Down"  "select-pane -D"
+        bind-key -n M-Left  if-shell "$is_vim" "send-keys M-Left"  "select-pane -L"
+        bind-key -n M-Right if-shell "$is_vim" "send-keys M-Right" "select-pane -R"
         tmux_version="$(tmux -V | sed -En "$version_pat")"
         setenv -g tmux_version "$tmux_version"
 
@@ -91,11 +92,10 @@ in {
         if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
           "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
 
-        bind-key -T copy-mode-vi M-h select-pane -L
-        bind-key -T copy-mode-vi M-j select-pane -D
-        bind-key -T copy-mode-vi M-k select-pane -U
-        bind-key -T copy-mode-vi M-l select-pane -R
-        bind-key -T copy-mode-vi M-\\ select-pane -l
+        # bind-key -T copy-mode-vi M-left select-pane -L
+        # bind-key -T copy-mode-vi M-down select-pane -D
+        # bind-key -T copy-mode-vi M-up select-pane -U
+        # bind-key -T copy-mode-vi M-right select-pane -R
 
         source-file ~/.tmux.conf
         bind r source-file ~/.tmux.conf

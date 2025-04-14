@@ -54,6 +54,8 @@ in {
     homeDirectory = "/home/vss";
     stateVersion = "24.05";
     packages = with pkgs; [
+      kanata-with-cmd
+
       neovim
       nodePackages_latest.pnpm
       nodePackages_latest.nodejs

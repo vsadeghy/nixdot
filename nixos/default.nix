@@ -32,7 +32,7 @@ in {
     };
     supportedFilesystems = ["ntfs"];
     extraModulePackages = with config.boot.kernelPackages; [ddcci-driver];
-    kernelModules = ["i2c-dev" "ddci-backlight"];
+    kernelModules = ["i2c-dev" "ddci-backlight" "uinput"];
     kernelParams = ["module_blacklist=amdgpu"];
   };
   nix.settings = {
@@ -128,6 +128,24 @@ in {
         });
       '';
   };
+  systemd.user.services = {
+    polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+    kanata-internalKeyboard.serviceConfig = {
+      SupplementaryGroups = ["input" "uinput"];
+    };
+  };
   services = {
     # openssh.enable = true;
     pipewire = {
@@ -148,10 +166,34 @@ in {
     blueman.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
+    devmon.enable = true;
 
     displayManager.defaultSession = "none+i3";
+
+    kanata = {
+      enable = true;
+      package = pkgs.kanata-with-cmd;
+      keyboards.kanata = {
+        devices = [
+          # Replace the paths below with the appropriate device paths for your setup.
+          # Use `ls /dev/input/by-path/` to find your keyboard devices.
+          # "/dev/input/by-path/pci-0000:2d:00.3-usb-0:1:1.0-event-kbd"
+          "/dev/input/by-path/pci-0000:2d:00.3-usbv2-0:1:1.0-event-kbd"
+        ];
+        extraDefCfg = ''
+          process-unmapped-keys yes
+          concurrent-tap-hold yes
+          chords-v2-min-idle 50
+          danger-enable-cmd yes
+        '';
+        config = builtins.readFile ./kanata.kbd;
+      };
+    };
+
     xserver = {
       enable = true;
+      displayManager.setupCommands = ''
+      '';
       windowManager = {
         i3 = {
           enable = true;
@@ -170,25 +212,15 @@ in {
 
       xkb = {
         layout = "us,ir";
-        options = "grp:shifts_toggle;caps:escape";
+        options = "grp:alts_toggle;caps:escape";
       };
 
       # videoDrivers = ["nvidia"];
     };
 
-    kanata = {
-      enable = true;
-      keyboards = {
-        homerow-extended = {
-          extraDefCfg = ''
-            process-unmapped-keys yes
-            concurrent-tap-hold yes
-            chords-v2-min-idle-experimental 50
-          '';
-          config = builtins.readFile ./kanata.kbd;
-        };
-      };
-    };
+    udev.extraRules = ''
+      KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+    '';
   };
 
   hardware = {
@@ -206,7 +238,7 @@ in {
         libGL
         glxinfo
         mesa-demos
-      #   nvtopPackages.full
+        # nvtopPackages.full
       ];
     };
     nvidia = {
@@ -223,23 +255,30 @@ in {
         Experimental = true;
       };
     };
+    uinput.enable = true;
   };
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.vss = {
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    ignoreShellProgramCheck = true;
-    extraGroups = ["wheel" "networkmanager" "input" "video" "audio" "storage"]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      alacritty
-      brave
-      nitrogen
-      variety
-      gh
-      stow
-      tlrc
-      xorg.libxcb
-    ];
+  users = {
+    extraGroups = {
+      storage = {};
+      uinput = {};
+    };
+    users.vss = {
+      isNormalUser = true;
+      shell = pkgs.zsh;
+      ignoreShellProgramCheck = true;
+      extraGroups = ["wheel" "networkmanager" "input" "video" "audio" "storage"]; # Enable ‘sudo’ for the user.
+      packages = with pkgs; [
+        alacritty
+        brave
+        nitrogen
+        variety
+        gh
+        stow
+        tlrc
+        xorg.libxcb
+      ];
+    };
   };
 
   # List packages installed in system profile. To search, run:

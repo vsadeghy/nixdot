@@ -3,8 +3,11 @@
   config,
   ...
 }: let
-  mod = "Mod4";
+  super = "Mod4";
   alt = "Mod1";
+  mod1 = "Control";
+  mod2 = alt;
+  meh = "Control+Shift+Mod1";
   browser = "zen";
   terminal = "ghostty";
   ws1 = "1";
@@ -54,7 +57,7 @@ in {
       for_window [urgent=latest] focus
     '';
     config = {
-      modifier = mod;
+      modifier = super;
       workspaceAutoBackAndForth = true;
       gaps = {
         inner = 14;
@@ -83,7 +86,7 @@ in {
       startup = [
         {command = "xrandr --output ${secondary} --mode 1280x1024 --pos 0x0 --rotate normal --rate 75 --output ${primary} --primary --mode 1920x1080 --pos 1285x0 --rotate normal --rate 144";}
         {command = "xss-lock --transfer-sleep-lock lock-color";}
-        # { command = "nitrogen --restore"; }
+        {command = "nitrogen --restore";}
         {command = "blueman-applet";}
         {command = "nekoray";}
         # { command = "clipit"; }
@@ -142,24 +145,21 @@ in {
           Escape = "mode default";
         };
       };
-      keycodebindings = {
-        "${mod}+Shift+40" = ''exec "rofi -modi drun,run -show drun"'';
-      };
       keybindings = {
         ## main
-        "${mod}+Return" = "exec ${terminal}";
-        "${mod}+d" = "exec --no-startup-id dmenu_run";
-        "${mod}+q" = "kill";
+        "${super}+Return" = "exec ${terminal}";
+        "${super}+d" = "exec --no-startup-id dmenu_run";
+        "${super}+q" = "kill";
 
         ## modes
-        "${mod}+x" = ''mode "${mode_system}"'';
-        "${mod}+g" = ''mode "${mode_gaps}"'';
-        "${mod}+r" = ''mode "resize"'';
+        "${super}+x" = ''mode "${mode_system}"'';
+        "${super}+g" = ''mode "${mode_gaps}"'';
+        "${super}+r" = ''mode "resize"'';
 
         ## borders
-        "${mod}+u" = "border none";
-        "${mod}+y" = "border pixel 1";
-        "${mod}+n" = "border normal";
+        "${super}+u" = "border none";
+        "${super}+y" = "border pixel 1";
+        "${super}+n" = "border normal";
 
         ## multimedia
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   +10%  && ${refresh_i3status}";
@@ -175,115 +175,118 @@ in {
         "Print" = "exec --no-startup-id flameshot gui";
 
         ## launcher
-        "${mod}+b" = "exec ${browser}";
+        "${meh}+b" = "exec ${browser}";
+        "${meh}+y" = "exec firefox";
+        "${meh}+o" = "exec obsidian";
+        "${meh}+f" = "exec ferdium";
+        "${meh}+e" = "exec pcmanfm";
+        "${meh}+c" = "exec galculator";
 
         ## split orientation
         #"${mod}+h" = "split h;exec notify-send 'tile horizontally'";
         #"${mod}+v" = "split v;exec notify-send 'tile vertically'";
-        "${mod}+semicolon" = "split toggle";
+        "${super}+semicolon" = "split toggle";
 
         #enter fullscreen mode for the focused container
-        "${mod}+f" = "fullscreen toggle";
+        "${super}+f" = "fullscreen toggle";
 
         #change container layout (stacked, tabbed, toggle split)
-        "${mod}+s" = "layout stacking";
-        "${mod}+w" = "layout tabbed";
-        "${mod}+shift+semicolon" = "layout toggle split";
+        "${super}+s" = "layout stacking";
+        "${super}+w" = "layout tabbed";
+        "${super}+shift+semicolon" = "layout toggle split";
 
         ## toggle tiling / floating
-        "${mod}+Shift+space" = "floating toggle";
+        "${super}+${mod2}+space" = "floating toggle";
 
         ## change focus between tiling / floating windows
-        "${mod}+space" = "focus mode_toggle";
+        "${super}+space" = "focus mode_toggle";
 
         ## toggle sticky
-        "${mod}+Shift+s" = "sticky toggle";
+        "${super}+${mod2}+s" = "sticky toggle";
 
         ## focus the parent container
-        "${mod}+a" = "focus parent";
+        "${super}+a" = "focus parent";
 
         ## move the currently focused window to the scratchpad
-        "${mod}+Shift+minus" = "move scratchpad";
+        "${super}+${mod2}+minus" = "move scratchpad";
 
         ## Show the next scratchpad window or hide the focused scratchpad window.
         ## If there are multiple scratchpad windows, this command cycles through them.
-        "${mod}+minus" = "scratchpad show";
+        "${super}+minus" = "scratchpad show";
 
         ## switch to workspace
-        "${mod}+h" = "focus left";
-        "${mod}+j" = "focus down";
-        "${mod}+k" = "focus up";
-        "${mod}+l" = "focus right";
-        "${mod}+Left" = "focus left";
-        "${mod}+Down" = "focus down";
-        "${mod}+Up" = "focus up";
-        "${mod}+Right" = "focus right";
-        "${mod}+o" = "workspace back_and_forth";
-        "${mod}+1" = "workspace number ${ws1}";
-        "${mod}+2" = "workspace number ${ws2}";
-        "${mod}+3" = "workspace number ${ws3}";
-        "${mod}+4" = "workspace number ${ws4}";
-        "${mod}+5" = "workspace number ${ws5}";
-        "${mod}+6" = "workspace number ${ws6}";
-        "${mod}+7" = "workspace number ${ws7}";
-        "${mod}+8" = "workspace number ${ws8}";
-        "${mod}+9" = "workspace number ${ws9}";
-        "${mod}+0" = "workspace number ${ws10}";
-        "${mod}+bracketleft" = "workspace ${prev}";
-        "${mod}+bracketright" = "workspace ${next}";
+        "${super}+h" = "focus left";
+        "${super}+j" = "focus down";
+        "${super}+k" = "focus up";
+        "${super}+l" = "focus right";
+        "${super}+Left" = "focus left";
+        "${super}+Down" = "focus down";
+        "${super}+Up" = "focus up";
+        "${super}+Right" = "focus right";
+        "${super}+o" = "workspace back_and_forth";
+        "${super}+1" = "workspace number ${ws1}";
+        "${super}+2" = "workspace number ${ws2}";
+        "${super}+3" = "workspace number ${ws3}";
+        "${super}+4" = "workspace number ${ws4}";
+        "${super}+5" = "workspace number ${ws5}";
+        "${super}+6" = "workspace number ${ws6}";
+        "${super}+7" = "workspace number ${ws7}";
+        "${super}+8" = "workspace number ${ws8}";
+        "${super}+9" = "workspace number ${ws9}";
+        "${super}+0" = "workspace number ${ws10}";
+        "${super}+bracketleft" = "workspace ${prev}";
+        "${super}+bracketright" = "workspace ${next}";
 
         ## move focused container to workspace
-        "${mod}+Shift+h" = "move left";
-        "${mod}+Shift+j" = "move down";
-        "${mod}+Shift+k" = "move up";
-        "${mod}+Shift+l" = "move right";
-        "${mod}+Shift+Left" = "move left";
-        "${mod}+Shift+Down" = "move down";
-        "${mod}+Shift+Up" = "move up";
-        "${mod}+Shift+Right" = "move right";
-        "${mod}+Shift+o" = "move container to workspace back_and_forth";
-        "${mod}+Shift+1" = "move container to workspace number ${ws1}";
-        "${mod}+Shift+2" = "move container to workspace number ${ws2}";
-        "${mod}+Shift+3" = "move container to workspace number ${ws3}";
-        "${mod}+Shift+4" = "move container to workspace number ${ws4}";
-        "${mod}+Shift+5" = "move container to workspace number ${ws5}";
-        "${mod}+Shift+6" = "move container to workspace number ${ws6}";
-        "${mod}+Shift+7" = "move container to workspace number ${ws7}";
-        "${mod}+Shift+8" = "move container to workspace number ${ws8}";
-        "${mod}+Shift+9" = "move container to workspace number ${ws9}";
-        "${mod}+Shift+0" = "move container to workspace number ${ws10}";
-        "${mod}+Shift+bracketleft" = "move container to workspace ${prev}";
-        "${mod}+Shift+bracketright" = "move container to workspace ${next}";
+        "${super}+${mod2}+h" = "move left";
+        "${super}+${mod2}+j" = "move down";
+        "${super}+${mod2}+k" = "move up";
+        "${super}+${mod2}+l" = "move right";
+        "${super}+${mod2}+Left" = "move left";
+        "${super}+${mod2}+Down" = "move down";
+        "${super}+${mod2}+Up" = "move up";
+        "${super}+${mod2}+Right" = "move right";
+        "${super}+${mod2}+o" = "move container to workspace back_and_forth";
+        "${super}+${mod2}+1" = "move container to workspace number ${ws1}";
+        "${super}+${mod2}+2" = "move container to workspace number ${ws2}";
+        "${super}+${mod2}+3" = "move container to workspace number ${ws3}";
+        "${super}+${mod2}+4" = "move container to workspace number ${ws4}";
+        "${super}+${mod2}+5" = "move container to workspace number ${ws5}";
+        "${super}+${mod2}+6" = "move container to workspace number ${ws6}";
+        "${super}+${mod2}+7" = "move container to workspace number ${ws7}";
+        "${super}+${mod2}+8" = "move container to workspace number ${ws8}";
+        "${super}+${mod2}+9" = "move container to workspace number ${ws9}";
+        "${super}+${mod2}+0" = "move container to workspace number ${ws10}";
+        "${super}+${mod2}+bracketleft" = "move container to workspace ${prev}";
+        "${super}+${mod2}+bracketright" = "move container to workspace ${next}";
 
         ## move focused container to workspace and switch to it
-        "${mod}+${alt}+h" = "move left; focus left";
-        "${mod}+${alt}+j" = "move down; focus down";
-        "${mod}+${alt}+k" = "move up; focus up";
-        "${mod}+${alt}+l" = "move right; focus right";
-        "${mod}+${alt}+Left" = "move left; focus left";
-        "${mod}+${alt}+Down" = "move down; focus down";
-        "${mod}+${alt}+Up" = "move up; focus up";
-        "${mod}+${alt}+Right" = "move right; focus right";
-        "${mod}+${alt}+o" = "move container to workspace back_and_forth; workspace back_and_forth";
-        "${mod}+${alt}+1" = "move container to workspace number ${ws1}; workspace number ${ws1}";
-        "${mod}+${alt}+2" = "move container to workspace number ${ws2}; workspace number ${ws2}";
-        "${mod}+${alt}+3" = "move container to workspace number ${ws3}; workspace number ${ws3}";
-        "${mod}+${alt}+4" = "move container to workspace number ${ws4}; workspace number ${ws4}";
-        "${mod}+${alt}+5" = "move container to workspace number ${ws5}; workspace number ${ws5}";
-        "${mod}+${alt}+6" = "move container to workspace number ${ws6}; workspace number ${ws6}";
-        "${mod}+${alt}+7" = "move container to workspace number ${ws7}; workspace number ${ws7}";
-        "${mod}+${alt}+8" = "move container to workspace number ${ws8}; workspace number ${ws8}";
-        "${mod}+${alt}+9" = "move container to workspace number ${ws9}; workspace number ${ws9}";
-        "${mod}+${alt}+0" = "move container to workspace number ${ws10}; workspace number ${ws10}";
-        "${mod}+${alt}+bracketleft" = "move container to workspace ${prev}; workspace ${prev}";
-        "${mod}+${alt}+bracketright" = "move container to workspace ${next}; workspace ${next}";
+        "${super}+${mod1}+h" = "move left; focus left";
+        "${super}+${mod1}+j" = "move down; focus down";
+        "${super}+${mod1}+k" = "move up; focus up";
+        "${super}+${mod1}+l" = "move right; focus right";
+        "${super}+${mod1}+Left" = "move left; focus left";
+        "${super}+${mod1}+Down" = "move down; focus down";
+        "${super}+${mod1}+Up" = "move up; focus up";
+        "${super}+${mod1}+Right" = "move right; focus right";
+        "${super}+${mod1}+o" = "move container to workspace back_and_forth; workspace back_and_forth";
+        "${super}+${mod1}+1" = "move container to workspace number ${ws1}; workspace number ${ws1}";
+        "${super}+${mod1}+2" = "move container to workspace number ${ws2}; workspace number ${ws2}";
+        "${super}+${mod1}+3" = "move container to workspace number ${ws3}; workspace number ${ws3}";
+        "${super}+${mod1}+4" = "move container to workspace number ${ws4}; workspace number ${ws4}";
+        "${super}+${mod1}+5" = "move container to workspace number ${ws5}; workspace number ${ws5}";
+        "${super}+${mod1}+6" = "move container to workspace number ${ws6}; workspace number ${ws6}";
+        "${super}+${mod1}+7" = "move container to workspace number ${ws7}; workspace number ${ws7}";
+        "${super}+${mod1}+8" = "move container to workspace number ${ws8}; workspace number ${ws8}";
+        "${super}+${mod1}+9" = "move container to workspace number ${ws9}; workspace number ${ws9}";
+        "${super}+${mod1}+0" = "move container to workspace number ${ws10}; workspace number ${ws10}";
+        "${super}+${mod1}+bracketleft" = "move container to workspace ${prev}; workspace ${prev}";
+        "${super}+${mod1}+bracketright" = "move container to workspace ${next}; workspace ${next}";
 
         ## reload the configuration file
-        "${mod}+Shift+c" = "reload";
+        "${super}+${mod2}+c" = "reload";
         ##  restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-        "${mod}+Shift+r" = "restart";
-        ## exit i3 (logs you out of your X session)
-        "${mod}+Shift+e" = ''exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
+        "${super}+${mod2}+r" = "restart";
       };
       # window.commands = [
       #   {
