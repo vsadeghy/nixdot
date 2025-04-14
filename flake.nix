@@ -57,7 +57,7 @@
       modules = [
         ./home
         nixvim.homeManagerModules.nixvim
-        catppuccin.homeManagerModules.catppuccin
+        catppuccin.homeModules.catppuccin
       ];
     };
   };

@@ -109,7 +109,25 @@ in {
     # keyMap = "us";
     useXkbConfig = true; # use xkb.options in tty.
   };
-  security.polkit.enable = true;
+  security.polkit = {
+    enable = true;
+    extraConfig =
+      /*
+      js
+      */
+      ''
+        polkit.addRule(function (action, subject) {
+          if (
+            action.id == "org.freedesktop.udisks2.filesystem-mount-system" &&
+            subject.local &&
+            subject.active &&
+            subject.isInGroup("storage")
+          ) {
+            return polkit.Result.YES;
+          }
+        });
+      '';
+  };
   services = {
     # openssh.enable = true;
     pipewire = {
@@ -211,7 +229,7 @@ in {
     isNormalUser = true;
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
-    extraGroups = ["wheel" "networkmanager" "input" "video" "audio"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "networkmanager" "input" "video" "audio" "storage"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       alacritty
       brave

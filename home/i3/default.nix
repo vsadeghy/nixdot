@@ -15,7 +15,7 @@
   ws6 = "6";
   ws7 = "7";
   ws8 = "8";
-  ws9 = "0";
+  ws9 = "9";
   ws10 = "10";
   refresh_i3status = "killall -SIGUSR1 i3status";
 

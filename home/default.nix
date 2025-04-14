@@ -79,6 +79,8 @@ in {
       ffmpegthumbnailer
       # libjpeg
       pcmanfm
+      lxde.lxmenu-data
+      shared-mime-info
       pavucontrol
       file-roller
       unrar
